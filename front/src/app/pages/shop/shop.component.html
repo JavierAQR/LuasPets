@@ -1,0 +1,70 @@
+<app-nav></app-nav>
+<section class="info">
+  <section class="textos-heater">
+    <h1>Porque su bienestar es lo más importante para nosotros</h1>
+    <p>
+      En Lua's Pets, ofrecemos una amplia gama de productos de alta calidad,
+      incluyendo deliciosos alimentos, accesorios esenciales y medicinas
+      efectivas para mantener a tus compañeros peludos saludables y felices.
+      Explora nuestra selección y encuentra todo lo que necesitas para consentir
+      a tu mascota.
+    </p>
+  </section>
+  <img src="assets/images/imagennav.png" alt="" />
+</section>
+<section class="petshop">
+<div class="titulo">
+  <h1>NUESTROS PRODUCTOS</h1>
+</div>
+<div class="seleccionarTipo">
+  <div (click)="switchProduct('alimento')" class="seccion">
+    <img src="/assets/images/select1.jpg" alt="">
+    <h1>ALIMENTOS</h1>
+  </div>
+  <div (click)="switchProduct('accesorio')" class="seccion">
+    <img src="/assets/images/select2.jpg" alt="">
+    <h1>ACCESORIOS</h1>
+  </div>
+  <div (click)="switchProduct('medicamento')" class="seccion">
+    <img src="/assets/images/select3.jpg" alt="">
+    <h1>MEDICAMENTOS</h1>
+  </div>
+</div>
+</section>
+
+<main class="contenido" [ngSwitch]="productSelect">
+  <section class="alimentos" *ngSwitchCase="'alimento'">
+    <div class="encabezado">
+  </div>
+    <div *ngFor="let alimento of alimentos" class="producto">
+      <img [src]="alimento.imagen" alt="{{alimento.nombre}}">
+      <h3>{{alimento.nombre}}</h3>
+      <span>S/{{alimento.precio}}</span>
+      <button>
+        <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+      </button>
+    </div>
+  </section>
+
+  <section class="accesorios" *ngSwitchCase="'accesorio'">
+    <div *ngFor="let accesorio of accesorios" class="producto">
+      <img [src]="accesorio.imagen" alt="{{accesorio.nombre}}">
+      <h3>{{accesorio.nombre}}</h3>
+      <span>S/{{accesorio.precio}}</span>
+      <button>
+        <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+      </button>
+    </div>
+  </section>
+
+  <section class="medicamentos" *ngSwitchCase="'medicamento'">
+    <div *ngFor="let medicamento of medicamentos" class="producto">
+      <img [src]="medicamento.imagen" alt="{{medicamento.nombre}}">
+      <h3>{{medicamento.nombre}}</h3>
+      <span>S/{{medicamento.precio}}</span>
+      <button>
+        <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+      </button>
+    </div>
+  </section>
+</main>

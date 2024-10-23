@@ -1,0 +1,170 @@
+.info{
+    display: flex;
+    justify-content: center;
+
+}
+
+.info section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    width: 30%;
+}
+
+section span{
+    background-color: green;
+    text-align: center;
+    padding-top: 5px;
+    height: 30px;
+    width: 50px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+}
+
+.info img {
+    width: 500px;
+    height: 400px;
+    animation: ease-in animat 1s;
+}
+
+.info p {
+    line-height: 25px;
+}
+
+@keyframes animat {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+main {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+main h1 {
+    font-size: 45px;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+
+.contenido section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+
+
+.alimentos .producto{
+    display: flex;
+}
+
+.alimentos div,
+.accesorios div,
+.medicamentos div {
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section div img {
+    width: 195px;
+    height: 200px;
+    
+}
+
+section div h3 {
+    padding-top: 10px;
+}
+
+section div button {
+    visibility: hidden;
+    background: #FF7A00;
+    border: inherit;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0;
+    margin-top: 10px;
+    font: inherit;
+    color: white;
+    cursor: pointer;
+}
+
+section div button:hover {
+    background: #db6a01;
+}
+
+section div:hover button {
+    visibility: visible;
+}
+
+.seleccionarTipo{
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    height: 400px;
+}
+
+.seleccionarTipo .seccion{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.seleccionarTipo .seccion img{
+    width: 100%;
+    display: block;
+    height: 100%;
+    filter: brightness(50%); 
+    transition: filter 0.3s ease; 
+    object-fit: cover;  
+}
+
+.seleccionarTipo .seccion:hover img{
+    filter: brightness(100%); 
+}
+
+.seleccionarTipo h1{
+    position: absolute;
+    color: white; 
+    font-size: 24px; 
+    letter-spacing: 2px;
+    font-size: 50px;
+}
+
+.petshop{
+    margin: 100px 0;
+}
+
+.petshop h1{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+}
+
+.titulo {
+    background-color: rgb(67, 67, 67);
+    height: 150px;
+}
+
+.titulo h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #f7e525;
+    font-size: 60px;
+}

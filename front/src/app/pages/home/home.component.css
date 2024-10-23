@@ -1,0 +1,198 @@
+main h1 {
+  margin: 50px;
+  font-size: 45px;
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+}
+
+main section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carousel{
+    display: flex;
+    width: 100%;
+    height: 880px;
+    position: relative;
+}
+
+.carousel-text {
+    position: absolute;
+    top: 0px;
+    right: 0px; /* Ajusta esto para la alineación lateral */
+    color: white;
+    z-index: 10;
+    text-align: left;
+    width: 800px; /* Limita el ancho del texto */
+    height: 100%;
+  }
+
+  .carousel-text h1 {
+    font-size: 6rem;
+    font-weight: bold;
+  }
+  .carousel-text p {
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .carousel-text {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+.seccionServicios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.servicio {
+  display: flex;
+  gap: 20px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 700px;
+  min-width: 500px;
+  border-radius: 10px;
+  border: 5px solid rgb(176, 147, 197);
+  height: 300px;
+  overflow: auto;
+}
+
+.servicio img {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.servicio .informacion {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+h4{
+  margin-bottom: 0px;
+}
+
+h5 {
+  font: bold;
+  font-size: 24px;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+h6 {
+  font-size: 16px;
+  text-align: justify;
+  font: bold;
+}
+
+.precio {
+  margin-top: auto;
+  margin-bottom: 10px;
+  font: bold;
+}
+
+.galeria {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 0px 100px;
+}
+
+.galeria .cliente img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20%;
+  box-shadow: 1px 1px 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.galeria .cliente img:hover {
+  width: 270px;
+  height: 270px;
+  box-shadow: 0px 15px 30px;
+}
+
+.seccionClientes {
+  padding-bottom: 100px;
+  margin-top: 50px;
+}
+
+.seccionContacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #ffd66d;
+  padding-bottom: 100px;
+}
+
+.contactanos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+
+.contactanos button {
+  height: 50px;
+  background-color: rgb(255, 213, 0);
+  border: none;
+  cursor: pointer;
+}
+
+.contactanos .correo {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 50px;
+  gap: 30px;
+  border-radius: 5%;
+}
+
+.correo input,
+.correo textarea {
+  border-radius: 15px;
+  height: 50px;
+  width: 400px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.correo textarea {
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.contactanos .otrosContactos {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.contactanos .ubicacion {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  align-items: center;
+  border-radius: 5%;
+}
+
+.ubicacion iframe {
+  border-radius: 40px;
+}

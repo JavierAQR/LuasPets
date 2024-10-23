@@ -1,0 +1,12 @@
+
+<nav>
+  <div class="nav-links">
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+    <a routerLink="/sobre-nosotros"  routerLinkActive="active">Sobre nosotros </a>
+    <a routerLink="/blog" routerLinkActive="active">Blog</a>
+    <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/petshop" routerLinkActive="active">Petshop</a>
+    <a routerLink="/inicio"  routerLinkActive="active">Portafolio</a>
+    <a routerLink="/iniciar-sesion"  (click)="logout()"  routerLinkActive="active">Cerrar Sesión</a>
+  </div>
+</nav>
