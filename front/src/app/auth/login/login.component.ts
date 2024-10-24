@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { LoginRequest } from 'src/app/services/auth/loginRequest';
 import { NgIf } from '@angular/common';
+import { AdminComponent } from 'src/app/admin/admin.component';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, NgIf]
+    imports: [ReactiveFormsModule, NgIf, AdminComponent, RouterLink, RouterLinkActive]
 })
 export class LoginComponent implements OnInit {
   loginError:string="";
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
           console.log(userData);
-          
+
         },
         error: (errorData) => {
           console.error(errorData);

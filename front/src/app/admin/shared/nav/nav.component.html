@@ -1,0 +1,82 @@
+<aside class="aside">
+  <nav class="sidebar" id="sidebar">
+    <div class="logo">
+      <h2 class="logotipo"><img src="../assets/images/logotipo.png" alt="" />Lua's Pets</h2>
+      <button class="abrir" id="abrir"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="opciones">
+      <li>
+        <input type="radio" id="dashboard" name="sidebar" />
+        <label for="dashboard" onclick="location.href='Dashboard.html'">
+          <i class="fa-solid fa-house"></i>
+          <p>Dashboard</p>
+        </label>
+      </li>
+      <li>
+        <input type="radio" id="usuarios" name="sidebar" />
+        <label for="usuarios" routerLink="/users" routerLinkActive="router-link-active" >
+          <i class="fa-solid fa-users"></i>
+          <p>Usuarios</p>
+        </label>
+      </li>
+      <li>
+        <input type="radio" id="personal" name="sidebar" />
+        <label for="personal" routerLink="/staff">
+          <i class="fa-solid fa-user-tie"></i>
+          <p>Personal</p>
+        </label>
+      </li>
+      <li>
+        <input type="radio" id="citas" name="sidebar" />
+        <label for="citas" onclick="location.href='Citas.html'">
+          <i class="fa-regular fa-calendar-check"></i>
+          <p>Citas</p>
+        </label>
+      </li>
+      <li>
+        <input type="radio" id="historial" name="sidebar" />
+        <label for="historial" onclick="location.href='Historial.html'">
+          <i class="fa-solid fa-book-open"></i>
+          <p>Historial Médico</p>
+        </label>
+      </li>
+      <li>
+        <input type="radio" id="settings" name="sidebar" />
+        <label for="settings">
+          <i class="fa-solid fa-cube"></i>
+          <p>Almacén</p>
+          <i class="ai-chevron-down-small"></i>
+        </label>
+        <div class="sub-menu">
+          <ul>
+            <li>
+              <button type="button" onclick="location.href='Alimentos.html'">Alimentos</button>
+            </li>
+            <li>
+              <button type="button" onclick="location.href='Accesorios.html'">Accesorios</button>
+            </li>
+            <li>
+              <button type="button" onclick="location.href='Medicamentos.html'">Medicamentos</button>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <input type="radio" id="ventas" name="sidebar" />
+        <label for="ventas" onclick="location.href='Ventas.html'">
+          <i class="fa-regular fa-pen-to-square"></i>
+          <p>Ventas</p>
+        </label>
+      </li>
+    </div>
+    <div class="salir">
+      <input type="radio" id="cerrar-sesion" name="sidebar" />
+      <label for="cerrar-sesion">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <p>Cerrar Sesión</p>
+      </label>
+    </div>
+  </nav>
+</aside>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
