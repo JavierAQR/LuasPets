@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { User } from 'src/app/services/auth/user';
 import { UserService } from 'src/app/services/user/user.service';
-import { environment } from 'src/environments/environment';
 import { NgIf } from '@angular/common';
 
 @Component({

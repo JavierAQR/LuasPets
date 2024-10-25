@@ -12,7 +12,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.backend.luaspets.Jwt.JwtAuthenticationFilter;
 
-
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -23,24 +22,26 @@ public class SecurityConfig {
         private final JwtAuthenticationFilter jwtAuthenticationFilter;
         private final AuthenticationProvider authProvider;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(csrf -> csrf
-                        .disable())
-                .authorizeHttpRequests(authRequest -> 
-                authRequest
-                        .requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated()
-                        )
-                .sessionManagement(sessionManager->
-                sessionManager
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                return http
+                                .csrf(csrf -> csrf
+                                                .disable())
+                                .authorizeHttpRequests(authRequest -> authRequest
+                                                .requestMatchers(HttpMethod.GET).permitAll()
+                                                .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                                                .requestMatchers("/auth/**").permitAll()
+
+                                                .requestMatchers("/api/v1/user/**").permitAll() // Admin para
+                                                                                                                     // gestión de
+                                                                                                                   // usuarios
+                                                .requestMatchers("/api/v1/user/update/**").permitAll()
+                                                .anyRequest().authenticated())
+                                .sessionManagement(sessionManager -> sessionManager
+                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                .authenticationProvider(authProvider)
+                                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                                .build();
+        }
 
 }

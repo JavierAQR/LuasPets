@@ -16,4 +16,5 @@ public class UserDTO {
     String fullName;
     String address;
     String phoneNumber;
+    int role;
 }

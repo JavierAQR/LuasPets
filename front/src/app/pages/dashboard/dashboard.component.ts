@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/auth/login.service';
-import { User } from 'src/app/services/auth/user';
 import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 import { NgIf } from '@angular/common';
 import { NavComponent } from '../../shared/nav/nav.component';

@@ -1,8 +1,8 @@
 <aside class="aside">
   <nav class="sidebar" id="sidebar">
     <div class="logo">
-      <h2 class="logotipo"><img src="../assets/images/logotipo.png" alt="" />Lua's Pets</h2>
-      <button class="abrir" id="abrir"><i class="fa-solid fa-bars"></i></button>
+      <h2 class="logotipo">Lua's Pets Admin</h2>
+      <!-- <button class="abrir" id="abrir"><i class="fa-solid fa-bars"></i></button> -->
     </div>
     <div class="opciones">
       <li>
@@ -14,7 +14,11 @@
       </li>
       <li>
         <input type="radio" id="usuarios" name="sidebar" />
-        <label for="usuarios" routerLink="/users" routerLinkActive="router-link-active" >
+        <label
+          for="usuarios"
+          routerLink="/users"
+          routerLinkActive="router-link-active"
+        >
           <i class="fa-solid fa-users"></i>
           <p>Usuarios</p>
         </label>
@@ -50,13 +54,19 @@
         <div class="sub-menu">
           <ul>
             <li>
-              <button type="button" onclick="location.href='Alimentos.html'">Alimentos</button>
+              <button type="button" onclick="location.href='Alimentos.html'">
+                Alimentos
+              </button>
             </li>
             <li>
-              <button type="button" onclick="location.href='Accesorios.html'">Accesorios</button>
+              <button type="button" onclick="location.href='Accesorios.html'">
+                Accesorios
+              </button>
             </li>
             <li>
-              <button type="button" onclick="location.href='Medicamentos.html'">Medicamentos</button>
+              <button type="button" onclick="location.href='Medicamentos.html'">
+                Medicamentos
+              </button>
             </li>
           </ul>
         </div>
@@ -70,13 +80,32 @@
       </li>
     </div>
     <div class="salir">
-      <input type="radio" id="cerrar-sesion" name="sidebar" />
-      <label for="cerrar-sesion">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <p>Cerrar Sesión</p>
-      </label>
+      <div class="option">
+        <input type="radio" id="cerrar-sesion" name="sidebar" />
+        <label for="cerrar-sesion">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <p routerLink="/home" routerLinkActive="active">
+            Regresar a Principal
+          </p>
+        </label>
+      </div>
+      <div class="option">
+        <input type="radio" id="cerrar-sesion" name="sidebar" />
+        <label for="cerrar-sesion">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <p
+            routerLink="/iniciar-sesion"
+            (click)="logout()"
+            routerLinkActive="active"
+          >
+            Cerrar Sesión
+          </p>
+        </label>
+      </div>
     </div>
   </nav>
 </aside>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>

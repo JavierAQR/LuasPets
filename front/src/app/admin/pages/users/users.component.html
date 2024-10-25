@@ -1,42 +1,59 @@
 <app-nav></app-nav>
-<div class="main">
-<h1>Gestión de Usuarios</h1>
-    <div class="contenedor">
-    <div class="contenido">
-        <div class="campo1">
-            <label for="idDNI">DNI:</label>
-            <input type="text" id="idDNI" placeholder="Ingrese su DNI">
-        </div>
-        <div class="campo2">
-            <label for="Nombre">Nombre:</label>
-            <input type="text" id="Nombre" placeholder="Ingrese su Nombre">
-        </div>
-        <div class="campo3">
-            <label for="Apellido">Apellido:</label>
-            <input type="text" id="Apellido" placeholder="Ingrese su Apellido">
-        </div>
-        <div class="campo4">
-            <label for="Correo">Correo:</label>
-            <input type="text" id="Correo" placeholder="Ingrese su Correo">
-        </div>
-        <div class="campo5">
-            <label for="Contraseña">Contraseña:</label>
-            <input type="text" id="Contraseña" placeholder="Ingrese su Contraseña">
-        </div>
-        <div class="campo6">
-            <label for="Teléfono">Teléfono:</label>
-            <input type="text" id="Teléfono" placeholder="Ingrese su Teléfono">
-        </div>
-        <div class="campo7">
-            <label for="Dirección">Dirección:</label>
-            <input type="text" id="Dirección" placeholder="Ingrese su Dirección">
-        </div>
-        <div class="botones">
-            <button id="buscar">BUSCAR <span class="icono">🔍</span></button>
-            <button id="ingresar">INGRESAR <span class="icono">✈️</span></button>
-            <button id="modificar">MODIFICAR <span class="icono">✏️</span></button>
-            <button id="eliminar">ELIMINAR <span class="icono">🗑️</span></button>
-        </div>
-      </div>
+<main>
+  <h2>Gestión de Usuarios</h2>
+  <div *ngIf="selectedUser" class="contenido">
+    <div class="campo1">
+      <label>Nombre Completo:</label>
+      <input [(ngModel)]="selectedUser.fullName" />
+    </div>
+    <div class="campo2">
+      <label>Correo Electrónico:</label>
+      <input [(ngModel)]="selectedUser.email" />
+    </div>
+    <div class="campo3">
+      <label>Dirección:</label>
+      <input [(ngModel)]="selectedUser.address" />
+    </div>
+    <div class="capo4">
+      <label>Teléfono:</label>
+      <input [(ngModel)]="selectedUser.phoneNumber" />
+    </div>
+    <div class="botones">
+      <button type="submit" (click)="updateUser()">
+        Guardar<span class="icono">✏️</span>
+      </button>
+      <button type="submit" (click)="cancelUpdate()">Cancelar</button>
     </div>
   </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre de Usuario</th>
+        <th>Nombre Completo</th>
+        <th>Correo Electrónico</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.fullName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <a (click)="editUser(user)" type="button" class="btn btn-primary"
+            >Editar</a
+          >
+          <a (click)="deleteUser(user.id)" class="btn btn-danger">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

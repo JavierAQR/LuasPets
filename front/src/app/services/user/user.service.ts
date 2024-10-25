@@ -29,6 +29,22 @@ export class UserService {
     )
   }
 
+  
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(environment.urlApi+"user");
+  }
+
+
+  registerUser(user: User): Observable<any> {
+    return this.http.post(environment.urlApi + 'user', user);
+  }
+
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(environment.urlApi + "user/" + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error:HttpErrorResponse){
     if(error.status===0){
       console.error('Se ha producio un error ', error.error);
@@ -38,4 +54,6 @@ export class UserService {
     }
     return throwError(()=> new Error('Algo falló. Por favor intente nuevamente.'));
   }
+
+  
 }
