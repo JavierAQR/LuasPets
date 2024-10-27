@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { NavComponent } from 'src/app/shared/nav/nav.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, NavComponent],
+  imports: [CommonModule, HttpClientModule, NavComponent, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

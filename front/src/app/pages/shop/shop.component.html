@@ -1,3 +1,4 @@
+<app-header></app-header>
 <app-nav></app-nav>
 <section class="info">
   <section class="textos-heater">
@@ -37,9 +38,9 @@
     <div class="encabezado">
   </div>
     <div *ngFor="let alimento of alimentos" class="producto">
-      <img [src]="alimento.imagen" alt="{{alimento.nombre}}">
-      <h3>{{alimento.nombre}}</h3>
-      <span>S/{{alimento.precio}}</span>
+      <img [src]="alimento.image_url" alt="{{alimento.name}}">
+      <h3>{{alimento.name}}</h3>
+      <span>S/{{alimento.price}}</span>
       <button>
         <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
       </button>

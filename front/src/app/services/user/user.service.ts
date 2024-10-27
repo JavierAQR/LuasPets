@@ -9,6 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
+  private apiUrl = `${environment.urlApi}user`;
+  private apiUrl2 = `${environment.urlApi2}user`;
+
   constructor(private http:HttpClient) { }
 
   private getUserId(): number | null {
@@ -22,11 +25,8 @@ export class UserService {
     )
   }
 
-  updateUser(userRequest:User):Observable<any>
-  {
-    return this.http.put(environment.urlApi+"user", userRequest).pipe(
-      catchError(this.handleError)
-    )
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
   }
 
   
@@ -36,7 +36,7 @@ export class UserService {
 
 
   registerUser(user: User): Observable<any> {
-    return this.http.post(environment.urlApi + 'user', user);
+    return this.http.post(environment.urlApi2 + 'register', user);
   }
 
   deleteUser(id: number): Observable<void> {

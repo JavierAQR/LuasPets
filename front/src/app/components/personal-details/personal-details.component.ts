@@ -73,17 +73,21 @@ export class PersonalDetailsComponent  {
     return this.registerForm.controls.phoneNumber;
   }
 
-  savePersonalDetailsData()
-  {
-    if (this.registerForm.valid)
-    {
-      this.userService.updateUser(this.registerForm.value as unknown as User).subscribe({
-        next:() => {
-          this.editMode=false;
-          this.user=this.registerForm.value as unknown as User;
-        },
-        error:(errorData)=> console.error(errorData)
-      })
+  savePersonalDetailsData(): void {
+    if (this.registerForm.valid) {
+      if (this.user && this.user.id) { // Verifica que this.user y this.user.id estén definidos
+        const updatedUser = this.registerForm.value as unknown as User;
+  
+        this.userService.updateUser(this.user.id, updatedUser).subscribe({
+          next: () => {
+            this.editMode = false;
+            this.user = updatedUser;
+          },
+          error: (errorData) => console.error(errorData)
+        });
+      } else {
+        console.error('User ID is undefined');
+      }
     }
   }
 

@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @PutMapping()
+    @PutMapping(value = "{id}")
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(userService.updateUser(userRequest));
     }

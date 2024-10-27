@@ -7,12 +7,15 @@ body {
   font-family: "Inria Sans", sans-serif;
 }
 
-h1 {
-  margin-top: 0px;
-  margin-left: 350px;
-  padding-top: 40px;
-  font-size: 50px;
+main{
+  margin-left: 330px;
+  margin-right: 20px;
 }
+
+main h1{
+  padding-top: 20px;
+}
+
 
 .contenedor {
   margin-left: 350px;

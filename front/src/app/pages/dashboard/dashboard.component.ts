@@ -3,13 +3,14 @@ import { LoginService } from 'src/app/services/auth/login.service';
 import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 import { NgIf } from '@angular/common';
 import { NavComponent } from '../../shared/nav/nav.component';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
     standalone: true,
-    imports: [NavComponent, NgIf, PersonalDetailsComponent]
+    imports: [NavComponent, NgIf, PersonalDetailsComponent, HeaderComponent]
 })
 export class DashboardComponent implements OnInit {
   userLoginOn:boolean=false;

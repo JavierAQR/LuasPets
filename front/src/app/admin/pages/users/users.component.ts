@@ -20,8 +20,8 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   selectedUser: User | null = null;
   userForm: FormGroup;
-  updateSuccess: string | null = null; // Para mensajes de éxito
-  isFormVisible: boolean = false;
+  showAddForm: boolean = false;
+  errorMessage: string = ''; 
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
     // Inicializar el formulario para editar usuarios
@@ -52,48 +52,59 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  // Método para mostrar el formulario de agregar
+  showAddFoodForm(): void {
+    this.showAddForm = true; // Mostrar el formulario de agregar
+    this.resetForm(); // Reiniciar el formulario
+  }
+
+  registerUser(): void {
+    if (this.userForm.valid) {
+      this.userService.registerUser(this.userForm.value).subscribe({
+        next: () => {
+          this.loadUsers(); // Recargar la lista después de agregar
+          this.resetForm(); // Reiniciar el formulario
+          this.showAddForm = false;
+        },
+        error: (err) => {
+          console.error('Error al registrar el usuario:', err);
+        }
+    });
+    }
+  }
+
   editUser(user: User): void {
     this.selectedUser = user;
     this.userForm.patchValue(user); // Rellenar el formulario con los datos del usuario seleccionado
+    this.showAddForm = false;
   }
 
-  deleteUser(id: number): void {
-    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-      this.userService.deleteUser(id).subscribe(
-        () => {
-          this.loadUsers(); // Recargar la lista de usuarios después de eliminar
-        },
-        (error) => {
-          console.error('Error al eliminar usuario:', error);
-        }
-      );
+  deleteUser (id: number | undefined): void {
+    if (id !== undefined) {
+      this.userService.deleteUser(id).subscribe({
+        next: () => this.loadUsers(),
+        error: (err) => (this.errorMessage = 'Error al eliminar el alimento')
+      });
     }
   }
 
-  cancelUpdate(){
-    this.selectedUser = null;
+  cancel(){
+    this.resetForm();
+    this.showAddForm = false;
   }
 
-  updateUser() {
+  updateUser(): void {
     if (this.selectedUser) {
-      this.userService.updateUser(this.selectedUser).subscribe(
-        (response) => {
-          // Maneja la respuesta (puedes mostrar un mensaje de éxito)
-          this.updateSuccess = 'Usuario actualizado correctamente.';
-          // Recarga la lista de usuarios
-          this.loadUsers(); // Resetea la selección después de actualizar
-          this.selectedUser = null; // Reiniciar la selección
+      this.userService.updateUser(this.selectedUser.id!, this.userForm.value).subscribe({
+        next: () => {
+          this.loadUsers(); // Recargar la lista después de actualizar
+          this.resetForm(); // Reiniciar el formulario
         },
-        (error) => {
-          // Maneja el error
-          console.error('Error al actualizar el usuario:', error);
+        error: (err) => {
+          console.error('Error al actualizar el alimento:', err);
         }
-      );
+      });
     }
-  }
-
-  selectUser(user: User) {
-    this.selectedUser = user; // Almacena el usuario seleccionado para edición
   }
 
   resetForm(): void {
@@ -101,19 +112,5 @@ export class UsersComponent implements OnInit {
     this.selectedUser = null;
   }
 
-  registerUser() {
-    if (this.userForm.valid) {
-      this.userService.registerUser(this.userForm.value).subscribe(
-        (response) => {
-          // Manejo de la respuesta
-          this.loadUsers(); // Recargar la lista de usuarios
-          this.userForm.reset(); // Reiniciar el formulario
-        },
-        (error) => {
-          console.error('Error al registrar el usuario:', error);
-        }
-      );
-    }
-  }
   
 }
