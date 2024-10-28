@@ -49,9 +49,9 @@
 
   <section class="accesorios" *ngSwitchCase="'accesorio'">
     <div *ngFor="let accesorio of accesorios" class="producto">
-      <img [src]="accesorio.imagen" alt="{{accesorio.nombre}}">
-      <h3>{{accesorio.nombre}}</h3>
-      <span>S/{{accesorio.precio}}</span>
+      <img [src]="accesorio.image_url" alt="{{accesorio.name}}">
+      <h3>{{accesorio.name}}</h3>
+      <span>S/{{accesorio.price}}</span>
       <button>
         <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
       </button>
@@ -60,9 +60,9 @@
 
   <section class="medicamentos" *ngSwitchCase="'medicamento'">
     <div *ngFor="let medicamento of medicamentos" class="producto">
-      <img [src]="medicamento.imagen" alt="{{medicamento.nombre}}">
-      <h3>{{medicamento.nombre}}</h3>
-      <span>S/{{medicamento.precio}}</span>
+      <img [src]="medicamento.image_url" alt="{{medicamento.name}}">
+      <h3>{{medicamento.name}}</h3>
+      <span>S/{{medicamento.price}}</span>
       <button>
         <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
       </button>

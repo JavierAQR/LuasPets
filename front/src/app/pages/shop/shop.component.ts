@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Accessories } from 'src/app/models/accessories.model';
 import { Food } from 'src/app/models/food.model';
+import { Medicine } from 'src/app/models/medicine.model';
+import { AccessoriesService } from 'src/app/services/accessories/accessories.service';
 import { FoodService } from 'src/app/services/food/food.service';
+import { MedicineService } from 'src/app/services/medicine/medicine.service';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { NavComponent } from 'src/app/shared/nav/nav.component';
 
@@ -15,11 +19,15 @@ import { NavComponent } from 'src/app/shared/nav/nav.component';
 export class ShopComponent implements OnInit{
 
   alimentos: Food[] = [];
+  accesorios: Accessories[] = [];
+  medicamentos: Medicine[] = [];
 
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService, private accessoriesService: AccessoriesService, private medicineService: MedicineService) {}
 
   ngOnInit(): void {
     this.loadFoods();
+    this.loadAccesories();
+    this.loadMedicines();
   }
 
   productSelect: String = '';  
@@ -31,50 +39,19 @@ export class ShopComponent implements OnInit{
     });
   }
 
-/*  alimentos = [
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-    {nombre: 'RICOCAN', precio: 30, imagen: 'assets/images/alimento1.png'},
-  ] */
+  loadAccesories(): void {
+    this.accessoriesService.getAllAccessories().subscribe({
+      next: (data) => (this.accesorios = data),
+      error: (err) => console.error('Error al cargar los accesorios', err)
+    });
+  }
 
-  accesorios = [
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'},
-    {nombre: 'JUGUETE', precio: 15, imagen: 'assets/images/accesorio1.png'}    
-  ]
-
-  medicamentos = [
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-    {nombre: 'MEDICAMENTO', precio: 40, imagen: 'assets/images/medicamento1.png'},
-  ]
+  loadMedicines(): void {
+    this.medicineService.getAllMedicine().subscribe({
+      next: (data) => (this.medicamentos = data),
+      error: (err) => console.error('Error al cargar las medicinas', err)
+    });
+  }
 
   switchProduct(product: String){
     this.productSelect = product;
