@@ -37,6 +37,10 @@ Para ejecutar este proyecto, asegúrate de tener instaladas las siguientes tecno
    - En caso de error, instala las dependencias necesarias ejecutando:
      npm install
 
+### Ejecución del Backend
+
+1. Ejecutar el archivo : LuasPetsApplication.java
+
 ## Credenciales de Acceso de Prueba
 Utiliza la siguiente cuenta para acceder al sistema en el entorno de pruebas:
 - Correo electrónico: noname@gmail.com
