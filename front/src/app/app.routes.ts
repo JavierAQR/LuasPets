@@ -17,7 +17,7 @@ export const routes: Routes = [
   {path:'record',loadComponent: ()=> import('./admin/pages/record/record.component').then(c=> c.RecordComponent)},
   {path:'medicine',loadComponent: ()=> import('./admin/pages/medicine/medicine.component').then(c=> c.MedicineComponent)},
   {path:'food',loadComponent: ()=> import('./admin/pages/food/food.component').then(c=> c.FoodComponent)},
-  {path:'accesories',loadComponent: ()=> import('./admin/pages/accesories/accesories.component').then(c=> c.AccesoriesComponent)},
+  {path:'accesories',loadComponent: ()=> import('./admin/pages/accessories/accessories.component').then(c=> c.AccesoriesComponent)},
   {path:'sales',loadComponent: ()=> import('./admin/pages/sales/sales.component').then(c=> c.SalesComponent)},
 ];
 
