@@ -1,3 +1,98 @@
-form {
-    margin: 20px;
-}
+.contenedor {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('/assets/images/logotipo.png'); /* Cambia esto por la ruta de tu imagen */
+    background-repeat: repeat; /* Permitir que la imagen de fondo se repita */
+  background-position: center;
+    background-repeat: repeat; /* La imagen de fondo no se repite */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .login-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 2rem; /* Espaciado interno */
+    width: 700px; /* Ancho del card */
+  }
+  
+  h2 {
+    text-align: center; /* Centra el título */
+    color: #333; /* Color del título */
+    margin-bottom: 1rem; /* Espacio inferior */
+  }
+  
+  .input-group {
+    margin-bottom: 1.5rem; /* Espacio entre los grupos de entrada */
+  }
+  
+  label {
+    display: block; /* Que el label ocupe toda la línea */
+    margin-bottom: 0.5rem; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+  }
+  
+  input {
+    width: 100%; /* Ancho completo del input */
+    padding: 0.5rem; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de fuente */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+  }
+  
+  input:focus {
+    border-color: #007bff; /* Cambia el borde al hacer foco */
+    outline: none; /* Sin contorno */
+  }
+  
+  .error-message {
+    color: red; /* Color rojo para mensajes de error */
+    font-size: 0.875rem; /* Tamaño de fuente para mensajes de error */
+  }
+  
+  .btn {
+    background-color: #007bff; /* Color del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 0.75rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    width: 100%; /* Ancho completo del botón */
+    transition: background-color 0.3s; /* Transición suave */
+  }
+  
+  .btn:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
+  }
+  
+  .register-link {
+    text-align: center; /* Centra el texto */
+    margin-top: 1rem; /* Espacio superior */
+  }
+  
+  .register-link a {
+    color: #007bff; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+  }
+  
+  @media (max-width: 576px) {
+    .login-card {
+      width: 90%; /* Ancho del card en dispositivos móviles */
+    }
+  }

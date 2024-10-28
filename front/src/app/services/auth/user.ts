@@ -5,5 +5,5 @@ export interface User {
     fullName:string;
     address:string;
     phoneNumber:string;
-    role: number;
+    role: string;
 }

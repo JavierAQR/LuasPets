@@ -7,6 +7,7 @@ export const routes: Routes = [
   {path:'iniciar-sesion', loadComponent: ()=> import('./auth/login/login.component').then(c => c.LoginComponent)},
   {path:'home', loadComponent: ()=> import('./pages/home/home.component').then(c => c.HomeComponent)},
   {path:'petshop', loadComponent: ()=> import('./pages/shop/shop.component').then(c => c.ShopComponent)},
+  {path:'registrarse', loadComponent: ()=> import('./auth/register/register.component').then(c => c.RegisterComponent)},
 
 
   /* Barra de Navegacion Intranet */

@@ -16,4 +16,5 @@ public class UserRequest {
     String dni;
     String address;
     String phoneNumber;
+    String role;
 }
