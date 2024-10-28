@@ -45,3 +45,6 @@ Utiliza la siguiente cuenta para acceder al sistema en el entorno de pruebas:
 ## Creacion de Productos
 En el campo "URL de la Imagen" utilizar la siguiente URL:
 - '/assets/images/ejemplo.jpg'
+
+## Base de Datos
+- Descarga la base de datos: https://www.mediafire.com/file/t22ts5bdiaujug0/veterinaria.sql/file
