@@ -21,7 +21,7 @@ export class PersonalDetailsComponent  {
   registerForm=this.formBuilder.group({
     id: [''],
     fullName: ['', Validators.required],
-    email: ['', Validators.required],
+    dni: ['', Validators.required],
     address: ['', Validators.required],
     phoneNumber: ['', Validators.required],
   })
@@ -35,7 +35,7 @@ export class PersonalDetailsComponent  {
           this.user = userData;
           this.registerForm.controls.id.setValue(userData.id.toString());
           this.registerForm.controls.fullName.setValue(userData.fullName);
-          this.registerForm.controls.email.setValue(userData.email);
+          this.registerForm.controls.dni.setValue(userData.dni);
           this.registerForm.controls.address.setValue(userData.address);
           this.registerForm.controls.phoneNumber.setValue(userData.phoneNumber);
         },
@@ -61,8 +61,8 @@ export class PersonalDetailsComponent  {
     return this.registerForm.controls.fullName;
   }
 
-  get email() {
-    return this.registerForm.controls.email;
+  get dni() {
+    return this.registerForm.controls.dni;
   }
 
   get address() {

@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Basic
     @Column(nullable = false)
     String username;
-    String email;
+    String dni;
     String password;
     String fullName;
     String address;

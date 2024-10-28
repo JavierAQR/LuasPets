@@ -6,13 +6,14 @@ import { Medicine } from 'src/app/models/medicine.model';
 import { AccessoriesService } from 'src/app/services/accessories/accessories.service';
 import { FoodService } from 'src/app/services/food/food.service';
 import { MedicineService } from 'src/app/services/medicine/medicine.service';
+import { FooterComponent } from 'src/app/shared/footer/footer.component';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { NavComponent } from 'src/app/shared/nav/nav.component';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [CommonModule, NavComponent, HeaderComponent],
+  imports: [CommonModule, NavComponent, HeaderComponent, FooterComponent],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })

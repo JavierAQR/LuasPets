@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
       username: [''],
       password: [''],
       fullName: [''],
-      email: [''],
+      dni: [''],
       address: [''],
       phoneNumber: [''],
       role: [null], // Puedes usar un enum o una lista de roles

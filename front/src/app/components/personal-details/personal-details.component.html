@@ -1,7 +1,8 @@
 <p *ngIf="errorMessage.length!=0" class="text-danger">{{errorMessage}}</p>
 <div>
     <p><b> Nombre: </b> {{user?.fullName}} </p>
-    <p><b> Email: </b> {{user?.email}}</p>
+    <p><b> Correo: </b> {{user?.username}} </p>
+    <p><b> DNI: </b> {{user?.dni}}</p>
     <p><b> Direccion: </b> {{user?.address}}</p>
     <p><b> Telefono: </b> {{user?.phoneNumber}}</p>
 
@@ -27,9 +28,9 @@
     <div class="form-group row">
         <label for="inputEmail" class="col-sm-1 col-form-label">DNI</label>
         <div class="col-sm-11">
-        <input type="text" formControlName="email" class="form-control" id="inputEmail">
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
-            <div *ngIf="email.errors?.['required']">
+        <input type="text" formControlName="dni" class="form-control" id="inputEmail">
+        <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="text-danger">
+            <div *ngIf="dni.errors?.['required']">
                 El DNI es requerido.
             </div>
         </div>

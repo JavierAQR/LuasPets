@@ -13,7 +13,7 @@ public class UserRequest {
     int id;
     String username;
     String fullName;
-    String email;
+    String dni;
     String address;
     String phoneNumber;
 }

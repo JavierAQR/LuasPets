@@ -19,13 +19,13 @@ public class UserService {
         User user = User.builder()
                 .id(userRequest.id)
                 .fullName(userRequest.getFullName())
-                .email(userRequest.getEmail())
+                .dni(userRequest.getDni())
                 .address(userRequest.getAddress())
                 .phoneNumber(userRequest.getPhoneNumber())
                 .role(Role.USER)
                 .build();
 
-        userRepository.updateUser(user.id, user.fullName, user.email, user.address, user.phoneNumber);
+        userRepository.updateUser(user.id, user.fullName, user.dni, user.address, user.phoneNumber);
         return new UserResponse("El usuario se actualizó satisfactoriamente");
 
     }
@@ -38,7 +38,7 @@ public class UserService {
                     .id(user.id)
                     .username(user.username)
                     .fullName(user.fullName)
-                    .email(user.email)
+                    .dni(user.dni)
                     .address(user.address)
                     .phoneNumber(user.phoneNumber)
                     .build();
@@ -51,7 +51,7 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(user -> new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getFullName(),
+                .map(user -> new UserDTO(user.getId(), user.getUsername(), user.getDni(), user.getFullName(),
                         user.getAddress(), user.getPhoneNumber()))
                 .collect(Collectors.toList());
     }
