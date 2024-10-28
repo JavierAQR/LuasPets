@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class JwtService {
 
     public String getToken(UserDetails user, Integer userId) {
         Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("role", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()); // Agregar roles al claims
         extraClaims.put("userId", userId); // Añadimos el userId a las claims
         return getToken(extraClaims, user);
     }

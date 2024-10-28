@@ -26,7 +26,7 @@ public class UserService {
                 .build();
 
         userRepository.updateUser(user.id, user.fullName, user.email, user.address, user.phoneNumber);
-        return new UserResponse("El usuario se registró satisfactoriamente");
+        return new UserResponse("El usuario se actualizó satisfactoriamente");
 
     }
 
@@ -52,7 +52,7 @@ public class UserService {
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(user -> new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getFullName(),
-                        user.getAddress(), user.getPhoneNumber(), user.getRole().ordinal()))
+                        user.getAddress(), user.getPhoneNumber()))
                 .collect(Collectors.toList());
     }
 

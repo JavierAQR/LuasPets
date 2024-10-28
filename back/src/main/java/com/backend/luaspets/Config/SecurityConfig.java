@@ -31,11 +31,7 @@ public class SecurityConfig {
                                                 .requestMatchers(HttpMethod.GET).permitAll()
                                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                                 .requestMatchers("/auth/**").permitAll()
-
-                                                .requestMatchers("/api/v1/user/**").permitAll() // Admin para
-                                                                                                                     // gestión de
-                                                                                                                   // usuarios
-                                                .requestMatchers("/api/v1/user/update/**").permitAll()
+                                                .requestMatchers("/api/v1/**").permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
