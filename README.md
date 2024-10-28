@@ -41,3 +41,7 @@ Para ejecutar este proyecto, asegúrate de tener instaladas las siguientes tecno
 Utiliza la siguiente cuenta para acceder al sistema en el entorno de pruebas:
 - Correo electrónico: noname@gmail.com
 - Contraseña: 123
+
+## Creacion de Productos
+En el campo "URL de la Imagen" utilizar la siguiente URL:
+- '/assets/images/ejemplo.jpg'
