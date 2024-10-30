@@ -1,0 +1,146 @@
+.servicios {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/IMG/servicios.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+
+}
+
+.servicios h1 {
+  color: white;
+  padding-left: 80px;
+  padding-right: 80px;
+  text-align: center;
+  margin-top: 25px;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.servicios h2 {
+  color: white;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 35px;
+  padding-left: 100px;
+  padding-right: 100px;
+  max-width: 1200px;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.services-cards {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.row.last-row {
+  justify-content: center;
+  /* Centrar las dos tarjetas en la última fila */
+}
+
+.col {
+  flex: 1;
+  max-width: 32%;
+  /* Ajusta el tamaño de las tarjetas */
+  margin: 10px;
+}
+
+.service-card {
+  height: 470px;
+  text-align: justify;
+  padding: 20px;
+  background-color: transparent;
+  border: 1px double #fff;
+  width: 100%;
+  border-radius: 25px;
+}
+
+.service-card img {
+  width: 100%;
+  /* Asegura que la imagen ocupe el ancho completo de la tarjeta */
+  height: 200px;
+  /* Mantiene la proporción de la imagen */
+  border-radius: 25px;
+}
+
+.service-card h3 {
+  margin: 15px 0;
+  text-align: left;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.boton {
+  text-align: right; /* Alinear el contenido del botón a la derecha */
+}
+
+
+.boton a{
+  width: 130px;
+  display: inline-block;
+  background: #fcd873;
+  text-align: center;
+  color: black;
+  padding: 8px 0px;
+  text-decoration: none;
+  font-weight: 400px;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-radius: 5px;
+  box-shadow: 0 8px 32px rgba(85, 83, 75, 0.46);
+  margin-top: 10px;
+}
+
+.boton a:hover{
+  background: white;
+  color: black;
+}
+
+.service-card p {
+  font-size: 16px;
+  text-align: left;
+  line-height: 1.4;
+  color: white;
+}
+
+/* Mantener tamaño de las últimas dos tarjetas */
+.last-row-card {
+  max-width: 32%;
+  /* Asegura que las tarjetas de la última fila no crezcan */
+}
+
+/* Ajustes responsivos para una card por fila */
+@media (max-width: 920px) {
+  .row {
+      flex-direction: column;
+      /* Forzar una card por fila */
+      align-items: center;
+  }
+
+  .col {
+      max-width: 400px;
+      /* Hacer que cada card ocupe el 100% del ancho */
+      margin: 20px 0;
+      /* Agregar algo de separación vertical */
+  }
+
+  .last-row-card {
+      max-width: 400px;
+      /* Mantener el tamaño en una fila en pantallas pequeñas */
+  }
+}

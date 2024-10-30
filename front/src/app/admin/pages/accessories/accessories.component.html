@@ -43,8 +43,8 @@
           <input formControlName="expiration_date" type="date" class="form-control" />
         </div>
 
-        <button type="submit" class="btn btn-success">{{ selectedAccessories ? 'Actualizar' : 'Agregar' }}</button>
-        
+        <button type="submit" class="btn btn-success" style="margin-right: 5px;">{{ selectedAccessories ? 'Actualizar' : 'Agregar' }}</button>
+
         <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
       </form>
     </div>
@@ -77,7 +77,7 @@
           <td>{{ accessories.created_at }}</td>
           <td>{{ accessories.expiration_date }}</td>
           <td>
-            <button class="btn btn-warning btn-sm" (click)="editAccessories(accessories)">Editar</button>
+            <button class="btn btn-warning btn-sm" (click)="editAccessories(accessories)" style="margin-right: 5px;">Editar</button>
             <button class="btn btn-danger btn-sm" (click)="deleteAccessories(accessories.id!)">Eliminar</button>
           </td>
         </tr>

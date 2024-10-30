@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 @Component({
   selector: 'app-food',
   standalone: true,
-  imports: [AdminComponent,NavComponent,RouterOutlet,CommonModule, ReactiveFormsModule],
+  imports: [AdminComponent, NavComponent, RouterOutlet, CommonModule, ReactiveFormsModule],
   templateUrl: './food.component.html',
   styleUrls: ['../../admin.component.css']
 })
@@ -79,45 +79,54 @@ export class FoodComponent implements OnInit {
     this.showAddForm = false;
   }
 
+  // Método para eliminar un alimento
+  deleteFood(id: number | undefined): void {
+    if (id !== undefined) {
+      this.foodService.deleteFood(id).subscribe({
+        next: () => this.loadFoods(),
+        error: (err) => (this.errorMessage = 'Error al eliminar el alimento')
+      });
+    }
+  }
 
-// Método para eliminar un alimento
-deleteFood(id: number | undefined): void {
-  if (id !== undefined) {
-    this.foodService.deleteFood(id).subscribe({
-      next: () => this.loadFoods(),
-      error: (err) => (this.errorMessage = 'Error al eliminar el alimento')
+  // Método para actualizar el alimento
+  updateFood(): void {
+    if (this.selectedFood) {
+      this.foodService.updateFood(this.selectedFood.id!, this.foodForm.value).subscribe({
+        next: () => {
+          this.loadFoods(); // Recargar la lista después de actualizar
+          this.resetForm(); // Reiniciar el formulario
+        },
+        error: (err) => {
+          console.error('Error al actualizar el alimento:', err);
+        }
+      });
+    }
+  }
+
+  // Método para reiniciar el formulario
+  resetForm(): void {
+    this.foodForm.reset();
+    this.selectedFood = null;
+  }
+
+  // Método para ocultar el formulario
+  cancel(): void {
+    this.resetForm();
+    this.showAddForm = false;
+  }
+
+  // Método para descargar el archivo Excel
+  downloadExcelFile(): void {
+    this.foodService.downloadExcel().subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'AlmacenComida.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
     });
   }
-}
-
-// Método para actualizar el alimento
-updateFood(): void {
-  if (this.selectedFood) {
-    this.foodService.updateFood(this.selectedFood.id!, this.foodForm.value).subscribe({
-      next: () => {
-        this.loadFoods(); // Recargar la lista después de actualizar
-        this.resetForm(); // Reiniciar el formulario
-      },
-      error: (err) => {
-        console.error('Error al actualizar el alimento:', err);
-      }
-    });
-  }
-}
-
-// Método para reiniciar el formulario
-resetForm(): void {
-  this.foodForm.reset();
-  this.selectedFood = null;
-}
-
-
-//Método para ocultar el formulario
-cancel(): void {
-  this.resetForm();
-  this.showAddForm = false;
-}
-
-
-
 }

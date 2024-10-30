@@ -11,10 +11,10 @@ export class FoodService {
 
   private apiUrl = `${environment.urlApi}food`;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-   // Obtener todos los productos
-   getAllFood(): Observable<Food[]> {
+  // Obtener todos los productos
+  getAllFood(): Observable<Food[]> {
     return this.http.get<Food[]>(this.apiUrl);
   }
 
@@ -36,5 +36,12 @@ export class FoodService {
   // Eliminar un producto por ID
   deleteFood(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  // Descargar el archivo Excel
+  downloadExcel(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export.xlsx`, {
+      responseType: 'blob'
+    });
   }
 }

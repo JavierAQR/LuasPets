@@ -7,8 +7,11 @@ export const routes: Routes = [
   {path:'iniciar-sesion', loadComponent: ()=> import('./auth/login/login.component').then(c => c.LoginComponent)},
   {path:'home', loadComponent: ()=> import('./pages/home/home.component').then(c => c.HomeComponent)},
   {path:'petshop', loadComponent: ()=> import('./pages/shop/shop.component').then(c => c.ShopComponent)},
+  {path:'blog', loadComponent: ()=> import('./pages/blog/blog.component').then(c => c.BlogComponent)},
   {path:'registrarse', loadComponent: ()=> import('./auth/register/register.component').then(c => c.RegisterComponent)},
 
+  /* Botones Blog Para Acceder al Secundario*/
+{path:'secondary', loadComponent: ()=> import('./pages/secondary/secondary.component').then(c => c.SecondaryComponent)},
 
   /* Barra de Navegacion Intranet */
   {path:'users', loadComponent: ()=> import('./admin/pages/users/users.component').then(c => c.UsersComponent)},

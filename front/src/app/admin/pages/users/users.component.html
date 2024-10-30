@@ -34,7 +34,7 @@
       <label class="form-label">Rol:</label>
       <input formControlName="role" class="form-control" required />
     </div>
-    <button type="submit" class="btn btn-success">{{ selectedUser ? 'Actualizar' : 'Agregar' }}</button>
+    <button type="submit" class="btn btn-success" style="margin-right: 5px;">{{ selectedUser ? 'Actualizar' : 'Agregar' }}</button>
 
     <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
   </form>
@@ -63,7 +63,7 @@
         <td>{{ user.role }}</td>
         <td>
           <a (click)="editUser(user)" type="button" class="btn btn-primary"
-            >Editar</a
+          style="margin-right: 5px;">Editar</a
           >
           <a (click)="deleteUser(user.id)" class="btn btn-danger">Eliminar</a>
         </td>
