@@ -8,7 +8,7 @@ export const routes: Routes = [
   {path:'home', loadComponent: ()=> import('./pages/home/home.component').then(c => c.HomeComponent)},
   {path:'petshop', loadComponent: ()=> import('./pages/shop/shop.component').then(c => c.ShopComponent)},
   {path:'blog', loadComponent: ()=> import('./pages/blog/blog.component').then(c => c.BlogComponent)},
-  {path:'registrarse', loadComponent: ()=> import('./auth/register/register.component').then(c => c.RegisterComponent)},
+  {path:'register', loadComponent: ()=> import('./auth/register/register.component').then(c => c.RegisterComponent)},
 
   /* Botones Blog Para Acceder al Secundario*/
 {path:'secondary', loadComponent: ()=> import('./pages/secondary/secondary.component').then(c => c.SecondaryComponent)},

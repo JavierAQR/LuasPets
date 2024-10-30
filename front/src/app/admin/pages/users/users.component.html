@@ -9,26 +9,47 @@
     <div class="mb-3">
       <label class="form-label">Nombre Completo:</label>
       <input formControlName="fullName" class="form-control" required />
+      <div *ngIf="userForm.get('fullName')?.invalid && (userForm.get('fullName')?.dirty || userForm.get('fullName')?.touched)" class="error-message">
+        <div *ngIf="userForm.get('fullName')?.errors?.['required']">El nombre completo es requerido.</div>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">Email:</label>
       <input formControlName="username" class="form-control" required />
+      <div *ngIf="userForm.get('username')?.invalid && (userForm.get('username')?.dirty || userForm.get('username')?.touched)" class="error-message">
+        <div *ngIf="userForm.get('username')?.errors?.['required']">El correo electrónico es requerido.</div>
+        <div *ngIf="userForm.get('username')?.errors?.['email']">Ingresa un correo electrónico válido.</div>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">DNI:</label>
       <input formControlName="dni" class="form-control" required />
+      <div *ngIf="userForm.get('dni')?.invalid && (userForm.get('dni')?.dirty || userForm.get('dni')?.touched)" class="error-message">
+        <div *ngIf="userForm.get('dni')?.errors?.['required']">El número de DNI es requerido.</div>
+        <div *ngIf="userForm.get('dni')?.errors?.['pattern']">El DNI solo puede contener números.</div>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">Dirección:</label>
       <input formControlName="address" class="form-control" required />
+      <div *ngIf="userForm.get('address')?.invalid && (userForm.get('address')?.dirty || userForm.get('address')?.touched)" class="error-message">
+        <div *ngIf="userForm.get('address')?.errors?.['required']">La dirección es requerida.</div>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">Teléfono:</label>
       <input formControlName="phoneNumber" class="form-control" required />
+      <div *ngIf="userForm.get('phoneNumber')?.invalid && (userForm.get('phoneNumber')?.dirty || userForm.get('phoneNumber')?.touched)" class="error-message">
+        <div *ngIf="userForm.get('phoneNumber')?.errors?.['required']">El número de teléfono es requerido.</div>
+        <div *ngIf="userForm.get('phoneNumber')?.errors?.['pattern']">El número de teléfono solo puede contener números.</div>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">Password:</label>
       <input formControlName="password" class="form-control" required />
+      <div *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)" class="error-message">
+        <div *ngIf="userForm.get('password')?.errors?.['required']">La dirección es requerida.</div>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">Rol:</label>

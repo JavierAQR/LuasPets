@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminComponent } from '../../admin.component';
 import { NavComponent } from '../../shared/nav/nav.component';
 import { User } from 'src/app/services/auth/user';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
@@ -27,12 +27,18 @@ export class UsersComponent implements OnInit {
     // Inicializar el formulario para editar usuarios
     this.userForm = this.formBuilder.group({
       id: [null],
-      username: [''],
-      password: [''],
-      fullName: [''],
-      dni: [''],
-      address: [''],
-      phoneNumber: [''],
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      fullName: ['', Validators.required],
+      dni: [
+        '', 
+        [Validators.required, Validators.pattern('^[0-9]+$')]
+      ],
+      address: ['', Validators.required],
+      phoneNumber: [
+        '', 
+        [Validators.required, Validators.pattern('^[0-9]+$')]
+      ],
       role: [null], // Puedes usar un enum o una lista de roles
     });
   }

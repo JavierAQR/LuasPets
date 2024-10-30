@@ -8,6 +8,10 @@ main{
   font-family: "Inria Sans", sans-serif;
 }
 
+.error-message {
+  color: red; /* Color rojo para mensajes de error */
+  font-size: 0.875rem; /* Tamaño de fuente para mensajes de error */
+}
 
 h1 {
   margin-top: 0px;

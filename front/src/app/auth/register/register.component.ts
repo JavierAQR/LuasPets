@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from 'src/app/services/auth/user';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterLinkActive],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -22,11 +22,20 @@ export class RegisterComponent {
     private router: Router
   ) {
     this.registerForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      dni: ['', Validators.required],
+      fullName: [
+        '', 
+        [Validators.required, Validators.pattern('^[a-zA-Z\\s]+$')]
+      ],
+      dni: [
+        '', 
+        [Validators.required, Validators.pattern('^[0-9]+$')]
+      ],
       username: ['', [Validators.required, Validators.email]],
-      address: [''],
-      phoneNumber: [''],
+      address: ['', Validators.required],
+      phoneNumber: [
+        '', 
+        [Validators.required, Validators.pattern('^[0-9]+$')]
+      ],
       password: ['', Validators.required],
     });
   }
@@ -65,10 +74,10 @@ export class RegisterComponent {
 
       this.userService.registerUser(newUser).subscribe({
         next: () => {
-          this.router.navigate(['/login']); // Redirigir a la página de inicio de sesión
+          this.router.navigate(['/iniciar-sesion']); // Redirigir a la página de inicio de sesión
         },
         error: (error) => {
-          this.errorMessage = error.error.message || 'Ocurrió un error. Por favor, inténtelo de nuevo.';
+          this.errorMessage = error.message || 'Ocurrió un error. Por favor, inténtelo de nuevo.';
         },
       });
     }

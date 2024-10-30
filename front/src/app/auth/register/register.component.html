@@ -15,6 +15,7 @@
             required>
           <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)" class="error-message">
             <div *ngIf="fullName?.errors?.['required']">El nombre completo es requerido.</div>
+            <div *ngIf="fullName?.errors?.['pattern']">No se permiten números en este campo.</div>
           </div>
         </div>
   
@@ -28,6 +29,7 @@
             required>
           <div *ngIf="dni?.invalid && (dni?.dirty || dni?.touched)" class="error-message">
             <div *ngIf="dni?.errors?.['required']">El DNI es requerido.</div>
+            <div *ngIf="dni?.errors?.['pattern']">Solo se permiten números en este campo.</div>
           </div>
         </div>
   
@@ -53,6 +55,9 @@
             type="text" 
             placeholder="Ingresa tu dirección" 
             required>
+            <div *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="error-message">
+            <div *ngIf="address?.errors?.['required']">La dirección es requerida</div>
+          </div>
         </div>
   
         <div class="input-group">
@@ -63,7 +68,12 @@
             type="text" 
             placeholder="Ingresa tu número de teléfono" 
             required>
+            <div *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)" class="error-message">
+              <div *ngIf="phoneNumber?.errors?.['required']">El email es requerido.</div>
+              <div *ngIf="phoneNumber?.errors?.['pattern']">Solo se permiten números en este campo.</div>
+            </div>
         </div>
+  
   
         <div class="input-group">
           <label for="password">Contraseña</label>
