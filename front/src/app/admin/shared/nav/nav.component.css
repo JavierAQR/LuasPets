@@ -46,14 +46,23 @@ nav .opciones {
   padding-bottom: 100px;
 }
 
-nav .salir {
-  margin-bottom: 50px;
-  background-color: black;
-  border-radius: 8px;
+nav .option {
+  display: flex;
+  flex-direction: column;
+
 }
 
+nav .option2 {
+  display: flex;
+  flex-direction: column;
+}
 
-
+.salir {
+  background-color: black;
+  height: 50px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
 
 .logo {
   margin-top: 20px;
