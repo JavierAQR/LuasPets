@@ -1,71 +1,119 @@
-/* register.component.css */
+/* Mantiene los estilos generales previos */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa; /* Color de fondo suave */
-    margin: 0;
-    padding: 0;
-  }
-  
-  .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Altura completa de la ventana */
-  }
-  
-  .register-card {
-    background-color: #ffffff; /* Fondo blanco */
-    padding: 2rem;
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    width: 300px; /* Ancho del card */
-  }
-  
-  h2 {
-    text-align: center;
-    color: #333; /* Color del texto */
-    margin-bottom: 1.5rem; /* Espacio inferior */
-  }
-  
-  .input-group {
-    margin-bottom: 1.5rem; /* Espacio entre los grupos de entrada */
-  }
-  
-  input {
-    width: 100%; /* Ancho completo del input */
-    padding: 0.5rem; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde gris claro */
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 1rem; /* Tamaño de fuente */
-  }
-  
-  input:focus {
-    border-color: #007bff; /* Cambia el borde al hacer foco */
-    outline: none; /* Sin contorno */
-  }
-  
-  .error-message {
-    color: red; /* Color rojo para mensajes de error */
-    font-size: 0.875rem; /* Tamaño de fuente para mensajes de error */
-  }
-  
-  .btn {
-    background-color: #007bff; /* Color del botón */
-    color: white; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 0.75rem; /* Espaciado interno */
-    font-size: 1rem; /* Tamaño de fuente */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    width: 100%; /* Ancho completo del botón */
-    transition: background-color 0.3s; /* Transición suave */
-  }
-  
-  .btn:hover {
-    background-color: #0056b3; /* Color al pasar el mouse */
-  }
-  
-  .text-primary {
-    color: #007bff; /* Color del enlace */
-    text-decoration: none; /* Sin subrayado */
-  }
+  background: linear-gradient(to top, #b06fdb, #98d0e6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin-bottom: 20%;
+}
+
+form {
+  border: 2px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  width: 28em;
+  min-height: 42em;
+  background: white;
+  padding: 0 3.1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+}
+
+/* logotipo */
+form img {
+  max-width: 40%;
+  height: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+form label {
+  display: block;
+  width: 100%;
+  font-weight: 600;
+  color: black;
+  margin-top: 1em;
+}
+
+form input {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  font-weight: 400;
+  color: black;
+  padding: 0.5em;
+  border: none;
+  border-bottom: 0.12em solid black;
+  outline: none;
+  margin-bottom: 0.5em;
+}
+
+form input:focus {
+  border-color: rgb(176, 147, 197);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 0.3em;
+  margin-bottom: 1em;
+}
+
+form button {
+  font-size: 1.1em;
+  padding: 1em;
+  border-radius: 2em;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(176, 147, 197);
+  color: black;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  margin-top: 1.2em;
+  transition: 0.5s;
+}
+
+form button:hover {
+  background-color: rgb(176, 147, 197);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+.register-link a {
+  color: rgb(0, 255, 149);
+  font-size: 1em;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  margin-bottom: 10px;
+}
