@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminComponent } from '../../admin.component';
 import { NavComponent } from '../../shared/nav/nav.component';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Medicine } from 'src/app/models/medicine.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,7 +9,7 @@ import { MedicineService } from 'src/app/services/medicine/medicine.service';
 @Component({
   selector: 'app-medicine',
   standalone: true,
-  imports: [AdminComponent,NavComponent,RouterOutlet,CommonModule, ReactiveFormsModule],
+  imports: [NavComponent,CommonModule, ReactiveFormsModule],
   templateUrl: './medicine.component.html',
   styleUrls: ['../../admin.component.css']
 })

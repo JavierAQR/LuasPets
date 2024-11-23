@@ -22,7 +22,7 @@ public class UserController {
 
     private final UserService userService;
 
-    /* Implementaciones nuevas */
+
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
