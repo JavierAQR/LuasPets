@@ -1,17 +1,17 @@
+import { UsersComponent } from './../../admin/pages/users/users.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink} from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { LoginRequest } from 'src/app/services/auth/loginRequest';
 import { NgIf } from '@angular/common';
-import { AdminComponent } from 'src/app/admin/admin.component';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, NgIf, AdminComponent, RouterLink, RouterLinkActive]
+    imports: [ReactiveFormsModule, NgIf, RouterLink]
 })
 export class LoginComponent implements OnInit {
   loginError:string="";
@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
       this.loginError="";
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
-          console.log(userData);
-
+          localStorage.setItem('token', userData); 
+          console.log('Token guardado:', userData);
         },
         error: (errorData) => {
           console.error(errorData);

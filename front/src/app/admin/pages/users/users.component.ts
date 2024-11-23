@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminComponent } from '../../admin.component';
 import { NavComponent } from '../../shared/nav/nav.component';
 import { User } from 'src/app/services/auth/user';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [AdminComponent,NavComponent, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [NavComponent, FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })

@@ -1,5 +1,7 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
@@ -7,10 +9,11 @@ import { LoginService } from 'src/app/services/auth/login.service';
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
     standalone: true,
-    imports: [RouterLink, RouterLinkActive]
+    imports: [RouterLink, RouterLinkActive, NgIf]
 })
 export class NavComponent implements OnInit {
   userLoginOn:boolean=false;
+  isAdmin: boolean = false; 
   constructor(private loginService:LoginService, private router:Router) { }
 
   ngOnInit(): void {
@@ -18,9 +21,27 @@ export class NavComponent implements OnInit {
       {
         next:(userLoginOn) => {
           this.userLoginOn=userLoginOn;
+          this.checkAdminRole();
         }
       }
-    )
+    );
+
+    this.checkAdminRole();
+  }
+  
+  checkAdminRole(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token); // Decodificar el token
+        this.isAdmin = decodedToken?.role.includes('ADMIN'); // Comprobar si el rol es 'ADMIN'
+      } catch (error) {
+        console.error('Error decodificando el token:', error);
+        this.isAdmin = false;
+      }
+    } else {
+      this.isAdmin = false; // Si no hay token, no es admin
+    }
   }
 
   logout()
