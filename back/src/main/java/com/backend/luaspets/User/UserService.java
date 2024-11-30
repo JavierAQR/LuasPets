@@ -5,12 +5,15 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.backend.luaspets.Model.Cart;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
 
     @Transactional
@@ -59,6 +62,13 @@ public class UserService {
 
     public void deleteUser(Integer id) {
         userRepository.deleteById(id);
+    }
+
+
+    public Cart getCartByUserId(Integer userId) {
+        return userRepository.findById(userId)
+            .map(User::getCart)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
 }

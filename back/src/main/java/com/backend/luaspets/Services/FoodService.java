@@ -1,10 +1,13 @@
-package com.backend.luaspets.Food;
+package com.backend.luaspets.Services;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.backend.luaspets.Model.Food;
+import com.backend.luaspets.Repository.FoodRepository;
 
 @Service
 public class FoodService {

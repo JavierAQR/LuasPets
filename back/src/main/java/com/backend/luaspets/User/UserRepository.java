@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     //Metodo personalizado: findByUsername
     //Optional para manejar valores que pueden ser nulos
     Optional<User> findByUsername(String username);
+    boolean existsByUsername(String username);
 
     @Modifying() //Indica consulta de modificación
 

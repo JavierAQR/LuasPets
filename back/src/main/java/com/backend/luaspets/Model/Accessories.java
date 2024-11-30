@@ -1,4 +1,8 @@
-package com.backend.luaspets.Food;
+package com.backend.luaspets.Model;
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,20 +14,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.math.BigDecimal;
 
-/* Primer Paso */
-/* Poner nombre de la base de datos  y un atributo que no se repita y que no sea el id */
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="products_food", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
-public class Food{
+@Table(name="products_accessories",uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
+
+public class Accessories {
     @Id
     @GeneratedValue
     Integer id;
@@ -42,3 +42,4 @@ public class Food{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     LocalDate created_at;
 }
+

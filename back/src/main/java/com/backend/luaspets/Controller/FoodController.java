@@ -1,4 +1,4 @@
-package com.backend.luaspets.Food;
+package com.backend.luaspets.Controller;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -19,6 +19,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.backend.luaspets.Model.Food;
+import com.backend.luaspets.Services.FoodService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

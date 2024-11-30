@@ -7,14 +7,19 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.backend.luaspets.Model.Cart;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 //Anotaciones JPA para trabajar con ORM (mapeo objeto-relacional) y convertir esta clase en una entidad de BDD.
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -53,6 +58,10 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING) //campo enumerado que se guarda como texto en la BD.
     Role role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Cart cart; // Relación de uno a uno con la entidad Cart
 
 
     //Define los roles o permisos de los usuarios. Spring Security gestiona los permisos.
