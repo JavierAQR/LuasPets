@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 @Component({
   selector: 'app-food',
   standalone: true,
-  imports: [AdminComponent, NavComponent, RouterOutlet, CommonModule, ReactiveFormsModule],
+  imports: [NavComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './food.component.html',
   styleUrls: ['../../admin.component.css']
 })

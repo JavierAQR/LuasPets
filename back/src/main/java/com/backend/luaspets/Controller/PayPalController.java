@@ -6,12 +6,14 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.paypal.core.PayPalHttpClient;
 import com.paypal.orders.OrdersCreateRequest;
 
 @Controller
+@CrossOrigin(origins = { "http://localhost:4200" })
 public class PayPalController {
 
     private final PayPalHttpClient payPalClient;
@@ -23,7 +25,7 @@ public class PayPalController {
 
 
     @GetMapping("/paypal/test")
-public ResponseEntity<String> testPayPalIntegration() {
+    public ResponseEntity<String> testPayPalIntegration() {
     OrdersCreateRequest request = new OrdersCreateRequest();
     request.prefer("return=representation");
 

@@ -4,18 +4,19 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.luaspets.DTO.SaleDetailDTO;
+import com.backend.luaspets.DTO.SaleDetailResponseDTO;
 import com.backend.luaspets.Model.Product;
 import com.backend.luaspets.Model.Sale;
 import com.backend.luaspets.Model.SaleDetail;
 import com.backend.luaspets.Repository.AccessoriesRepository;
 import com.backend.luaspets.Repository.FoodRepository;
 import com.backend.luaspets.Repository.MedicineRepository;
-import com.backend.luaspets.Repository.ProductRepository;
 import com.backend.luaspets.Repository.SaleDetailRepository;
 import com.backend.luaspets.Repository.SaleRepository;
 import com.backend.luaspets.User.User;
@@ -24,14 +25,14 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class SaleService {
-    
- @Autowired
+
+    @Autowired
     private SaleRepository saleRepository;
 
     @Autowired
     private SaleDetailRepository saleDetailRepository;
 
-     @Autowired
+    @Autowired
     private FoodRepository foodRepository;
 
     @Autowired
@@ -40,13 +41,33 @@ public class SaleService {
     @Autowired
     private AccessoriesRepository accessoriesRepository;
 
-     @Transactional
+    public List<Sale> getAllSales() {
+        return saleRepository.findAll();
+    }
+
+    public List<SaleDetailResponseDTO> getSaleDetailsById(Integer saleId) {
+        Sale sale = saleRepository.findById(saleId)
+            .orElseThrow(() -> new RuntimeException("Venta no encontrada: " + saleId));
+        
+        // Mapear los detalles de la venta a DTOs
+        return sale.getSaleDetail().stream().map(detail -> {
+            SaleDetailResponseDTO dto = new SaleDetailResponseDTO();
+            dto.setIdDetail(detail.getIdDetail());
+            dto.setQuantity(detail.getQuantity());
+            dto.setUnitPrice(detail.getUnitPrice());
+            dto.setProductName(detail.getProduct().getName()); // Asumiendo que Product tiene un método getName()
+            dto.setUserFullName(sale.getUser().getFullName()); // Asumiendo que User tiene un método getFullName()
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    @Transactional
     public Sale createSale(User user, List<SaleDetailDTO> saleDetailsDTO) {
         // Crear la venta
         Sale sale = new Sale();
         sale.setUser(user);
         sale.setSaleDate(LocalDateTime.now());
-        sale.setSaleStatus("PENDIENTE");
+        sale.setSaleStatus("COMPLETADO");
         BigDecimal totalAmount = BigDecimal.ZERO;
 
         List<SaleDetail> saleDetails = new ArrayList<>();
@@ -60,8 +81,7 @@ public class SaleService {
             // Validar stock
             if (product.getStock() < dto.getQuantity()) {
                 throw new IllegalArgumentException(
-                    "Not enough stock for product with ID " + dto.getProductId() + "."
-                );
+                        "Not enough stock for product with ID " + dto.getProductId() + ".");
             }
 
             // Reducir stock
