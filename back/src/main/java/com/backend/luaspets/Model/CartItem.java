@@ -1,5 +1,7 @@
 package com.backend.luaspets.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,13 +29,15 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
+    @JsonBackReference 
     private Cart cart;
 
-    @Column(name = "product_id", nullable = false)
-    private Integer productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product; // Relación con la clase base Product
 
     @Column(name = "product_type", nullable = false)
-    private String productType;
+    private String productType; // Este es el campo que se necesita
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

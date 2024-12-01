@@ -1,0 +1,37 @@
+<app-header></app-header>
+<app-nav></app-nav>
+
+<!-- cart.component.html -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Carrito de Compras</h2>
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <div *ngFor="let item of cartItems" class="row mb-3 border p-3 rounded">
+      <div class="col-md-2">
+        <img [src]="item.product.image_url" alt="{{ item.product.name }}" class="img-fluid rounded">
+      </div>
+      <div class="col-md-6">
+        <h5>{{ item.product.name }}</h5>
+        <p class="text-muted">Precio: S/{{ item.price }}</p>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-secondary me-2" (click)="decreaseQuantity(item)">-</button>
+          <span class="fs-5">{{ item.quantity }}</span>
+          <button class="btn btn-outline-secondary ms-2" (click)="increaseQuantity(item)">+</button>
+        </div>
+      </div>
+      <div class="col-md-2 text-end">
+        <button class="btn btn-danger" (click)="removeItem(item)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-3 text-end">
+    <h5>Total: <span class="fw-bold">S/{{ getTotalCost() | number: '1.2-2' }}</span></h5>
+  </div>
+  <ng-template #emptyCart>
+    <div class="text-center">
+      <p class="lead">Tu carrito está vacío.</p>
+      <a routerLink="/petshop" class="btn btn-primary">Explorar productos</a>
+    </div>
+  </ng-template>
+</div>
+
+  <app-footer></app-footer>

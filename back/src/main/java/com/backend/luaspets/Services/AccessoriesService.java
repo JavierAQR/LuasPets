@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.backend.luaspets.Model.Accessories;
 import com.backend.luaspets.Repository.AccessoriesRepository;
 
-;
 
 @Service
 public class AccessoriesService {

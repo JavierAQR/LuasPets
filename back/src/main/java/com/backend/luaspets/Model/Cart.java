@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.backend.luaspets.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -49,6 +50,7 @@ public class Cart {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference // Indica que esta relación será gestionada
     private List<CartItem> cartItems;
 
     @PrePersist

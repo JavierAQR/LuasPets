@@ -41,7 +41,7 @@
       <img [src]="alimento.image_url" alt="{{alimento.name}}">
       <h3>{{alimento.name}}</h3>
       <span>S/{{alimento.price}}</span>
-      <button>
+      <button (click)="addToCart(alimento, 1)">
         <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
       </button>
     </div>
@@ -52,7 +52,7 @@
       <img [src]="accesorio.image_url" alt="{{accesorio.name}}">
       <h3>{{accesorio.name}}</h3>
       <span>S/{{accesorio.price}}</span>
-      <button>
+      <button (click)="addToCart(accesorio, 1)">
         <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
       </button>
     </div>
@@ -63,7 +63,7 @@
       <img [src]="medicamento.image_url" alt="{{medicamento.name}}">
       <h3>{{medicamento.name}}</h3>
       <span>S/{{medicamento.price}}</span>
-      <button>
+      <button (click)="addToCart(medicamento, 1)">
         <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
       </button>
     </div>

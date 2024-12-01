@@ -30,8 +30,10 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(authRequest -> authRequest
                                                 .requestMatchers(HttpMethod.GET).permitAll()
                                                 .requestMatchers(HttpMethod.POST).permitAll()
-                                                .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
+                                                .requestMatchers(HttpMethod.PUT).permitAll()
+                                                .requestMatchers(HttpMethod.DELETE).permitAll()
                                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                                                .requestMatchers("/api/cart/**").permitAll()
                                                 .requestMatchers("/auth/**").permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager
