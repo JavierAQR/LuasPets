@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.backend.luaspets.Model.Cart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 //Anotaciones JPA para trabajar con ORM (mapeo objeto-relacional) y convertir esta clase en una entidad de BDD.
@@ -57,6 +58,7 @@ public class User implements UserDetails {
     String phoneNumber;
 
     @Enumerated(EnumType.STRING) //campo enumerado que se guarda como texto en la BD.
+    @JsonIgnore
     Role role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

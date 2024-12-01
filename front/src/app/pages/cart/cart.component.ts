@@ -18,14 +18,14 @@ import { NavComponent } from 'src/app/shared/nav/nav.component';
 export class CartComponent implements OnInit{
 
   cartItems: CartItem[] = [];
-  cartId!: number; // Este valor debería provenir de una fuente segura, como la sesión del usuario
+  cartId!: number; 
 
   constructor(private cartService: CartService, private loginService: LoginService) {}
 
   ngOnInit(): void {
     const userId = this.loginService.userId; // Obtén el userId desde LoginService
     if (userId) {
-      this.cartId = parseInt(userId, 10); // Convierte el userId a un número (si es necesario)
+      this.cartId = parseInt(userId, 10);
       this.loadCartItems();
     } else {
       console.error('Usuario no autenticado');
