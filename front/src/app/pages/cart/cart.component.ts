@@ -11,7 +11,7 @@ import { NavComponent } from 'src/app/shared/nav/nav.component';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, NavComponent, HeaderComponent,FooterComponent, RouterLink, RouterLinkActive],
+  imports: [CommonModule, NavComponent, HeaderComponent,FooterComponent, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
