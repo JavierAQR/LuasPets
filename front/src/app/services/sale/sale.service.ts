@@ -31,8 +31,6 @@ export class SaleService {
       totalAmount: totalAmount,
     };
 
-    console.log('Enviando datos de venta:', saleData);
-
     return this.http.post<Sale>(`${this.apiUrl}/create`, saleData);
   }
 

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Accessories } from 'src/app/models/accessories.model';
-import { CartItem } from 'src/app/models/cartItem.model';
 import { Food } from 'src/app/models/food.model';
 import { Medicine } from 'src/app/models/medicine.model';
 import { AccessoriesService } from 'src/app/services/accessories/accessories.service';
@@ -43,22 +42,19 @@ export class ShopComponent implements OnInit{
 
   loadFoods(): void {
     this.foodService.getAllFood().subscribe({
-      next: (data) => (this.alimentos = data),
-      error: (err) => console.error('Error al cargar los alimentos', err),
+      next: (data) => (this.alimentos = data), error: () => {},
     });
   }
 
   loadAccesories(): void {
     this.accessoriesService.getAllAccessories().subscribe({
-      next: (data) => (this.accesorios = data),
-      error: (err) => console.error('Error al cargar los accesorios', err),
+      next: (data) => (this.accesorios = data), error: () => {},
     });
   }
 
   loadMedicines(): void {
     this.medicineService.getAllMedicine().subscribe({
-      next: (data) => (this.medicamentos = data),
-      error: (err) => console.error('Error al cargar las medicinas', err),
+      next: (data) => (this.medicamentos = data), error: () => {},
     });
   }
 
@@ -68,54 +64,32 @@ export class ShopComponent implements OnInit{
 
   // Método para agregar un producto al carrito
   addToCart(product: any, quantity: number): void {
-    // Obtener el userId desde LoginService
     const userId = this.loginService.userId;
-  
-    if (userId) {
-      // Convertir el userId a número si es necesario
-      const cartId = parseInt(userId, 10);
-  
-      if (!isNaN(cartId)) {
-        // Obtener el tipo de producto usando la función `getProductType`
-        const productType = this.getProductType(product);
-  
-        // Crear el objeto con los datos del producto
-        const itemData = {
-          productId: product.id,
-          productType: productType,
-          quantity: quantity
-        };
-  
-        // Realizar la solicitud HTTP usando el CartService
-        this.cartService.addItemToCart(cartId, itemData).subscribe({
-          next: (response) => {
-            console.log('Producto agregado al carrito:', response);
-            alert('Producto agregado al carrito');
-          },
-          error: (err) => {
-            console.error('Hubo un problema al agregar el producto al carrito:', err);
-            alert('Hubo un problema al agregar el producto al carrito.');
-          }
-        });
-      } else {
-        console.error('El userId no es un número válido');
-        alert('Error: ID de usuario no válido.');
-      }
-    } else {
-      console.error('Usuario no autenticado');
-      alert('Error: Usuario no autenticado.');
-    }
+    if (!userId) return;
+
+    const cartId = parseInt(userId, 10);
+    if (isNaN(cartId)) return;
+
+    const itemData = {
+      productId: product.id,
+      productType: this.getProductType(product),
+      quantity
+    };
+
+    this.cartService.addItemToCart(cartId, itemData).subscribe({
+      next: () => {},
+      error: () => {}
+    });
   }
   
-  getProductType(product: any): string {
-    // Asume que tienes un método que determina el tipo de producto, puedes adaptarlo según tus necesidades
-    if (product.hasOwnProperty('price')) {
-      if (product.image_url.includes('alimento')) return 'FOOD';
-      if (product.image_url.includes('accesorio')) return 'ACCESSORY';
-      if (product.image_url.includes('medicamento')) return 'MEDICINE';
-    }
-    return 'UNKNOWN';
+getProductType(product: any): string {
+  if (product.hasOwnProperty('price')) {
+    if (product.image_url.includes('alimento')) return 'FOOD';
+    if (product.image_url.includes('accesorio')) return 'ACCESSORY';
+    if (product.image_url.includes('medicamento')) return 'MEDICINE';
   }
+  return 'UNKNOWN';
+}
 
   
 }

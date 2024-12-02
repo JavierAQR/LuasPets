@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminComponent } from '../../admin.component';
 import { NavComponent } from '../../shared/nav/nav.component';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Accessories } from 'src/app/models/accessories.model';
@@ -10,7 +9,7 @@ import { AccessoriesService } from 'src/app/services/accessories/accessories.ser
 @Component({
   selector: 'app-accesories',
   standalone: true,
-  imports: [AdminComponent,NavComponent,RouterOutlet,CommonModule, ReactiveFormsModule],
+  imports: [NavComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './accessories.component.html',
   styleUrls: ['../../admin.component.css']
 })
@@ -117,6 +116,4 @@ cancel(): void {
   this.resetForm();
   this.showAddForm = false;
 }
-
-
 }

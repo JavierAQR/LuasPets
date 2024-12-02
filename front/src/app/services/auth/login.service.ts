@@ -1,8 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from './loginRequest';
-import  {  Observable, throwError, catchError, BehaviorSubject , tap, map} from 'rxjs';
-import { User } from './user';
+import  {  Observable,  BehaviorSubject , tap, map} from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -26,8 +25,7 @@ export class LoginService {
         this.currentUserData.next(userData.token);
         this.currentUserLoginOn.next(true);
       }),
-      map((userData)=> userData.token),
-      catchError(this.handleError)
+      map((userData)=> userData.token)
     );
   }
 
@@ -35,16 +33,6 @@ export class LoginService {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userId"); // Elimina el userId al cerrar sesión
     this.currentUserLoginOn.next(false);
-  }
-
-  private handleError(error:HttpErrorResponse){
-    if(error.status===0){
-      console.error('Se ha producio un error ', error.error);
-    }
-    else{
-      console.error('Backend retornó el código de estado ', error);
-    }
-    return throwError(()=> new Error('Algo falló. Por favor intente nuevamente.'));
   }
 
   get userData():Observable<String>{

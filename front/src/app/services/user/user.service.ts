@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { Observable} from 'rxjs';
 import { User } from '../auth/user';
 import { environment } from 'src/environments/environment';
 
@@ -20,9 +20,7 @@ export class UserService {
   }
 
   getUser(id:number):Observable<User>{
-    return this.http.get<User>(environment.urlApi+"user/"+id).pipe(
-      catchError(this.handleError)
-    )
+    return this.http.get<User>(environment.urlApi+"user/"+id)
   }
 
   updateUser(id: number, user: User): Observable<User> {
@@ -40,20 +38,7 @@ export class UserService {
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(environment.urlApi + "user/" + id).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.delete<void>(environment.urlApi + "user/" + id)
   }
-
-  private handleError(error:HttpErrorResponse){
-    if(error.status===0){
-      console.error('Se ha producio un error ', error.error);
-    }
-    else{
-      console.error('Backend retornó el código de estado ', error.status, error.error);
-    }
-    return throwError(()=> new Error('Algo falló. Por favor intente nuevamente.'));
-  }
-
-  
+ 
 }

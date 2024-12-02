@@ -13,9 +13,9 @@
         <h5>{{ item.product.name }}</h5>
         <p class="text-muted">Precio: S/{{ item.price }}</p>
         <div class="d-flex align-items-center">
-          <button class="btn btn-outline-secondary me-2" (click)="decreaseQuantity(item)">-</button>
+          <button class="btn btn-outline-secondary me-2" (click)="updateQuantity(item, false)">-</button>
           <span class="fs-5">{{ item.quantity }}</span>
-          <button class="btn btn-outline-secondary ms-2" (click)="increaseQuantity(item)">+</button>
+          <button class="btn btn-outline-secondary ms-2" (click)="updateQuantity(item, true)">+</button>
         </div>
       </div>
       <div class="col-md-2 text-end">
