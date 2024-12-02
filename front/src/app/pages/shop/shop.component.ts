@@ -79,11 +79,15 @@ export class ShopComponent implements OnInit{
         // Obtener el tipo de producto usando la función `getProductType`
         const productType = this.getProductType(product);
   
-        // Formar la URL de la API
-        const url = `http://localhost:8080/api/cart/${cartId}/items?productId=${product.id}&productType=${productType}&quantity=${quantity}`;
-    
+        // Crear el objeto con los datos del producto
+        const itemData = {
+          productId: product.id,
+          productType: productType,
+          quantity: quantity
+        };
+  
         // Realizar la solicitud HTTP usando el CartService
-        this.cartService.addItemToCart(url).subscribe({
+        this.cartService.addItemToCart(cartId, itemData).subscribe({
           next: (response) => {
             console.log('Producto agregado al carrito:', response);
             alert('Producto agregado al carrito');

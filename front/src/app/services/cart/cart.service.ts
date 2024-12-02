@@ -25,8 +25,8 @@ export class CartService {
   }
 
   // Método para agregar un producto al carrito
-  addItemToCart(url: string) {
-    return this.http.post(url, null); // Envía la solicitud POST con la URL generada
+  addItemToCart(cartId: number, itemData: { productId: number; productType: string; quantity: number }): Observable<CartItem> {
+    return this.http.post<CartItem>(`${this.baseUrl}/${cartId}/items`, itemData);
   }
 
   // Método para obtener todos los productos de un carrito
