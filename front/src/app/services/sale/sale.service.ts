@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Sale } from 'src/app/models/sale.model';
 import { environment } from 'src/environments/environment';
 
@@ -31,7 +31,7 @@ export class SaleService {
       totalAmount: totalAmount,
     };
 
-    console.log('Sending sale data:', saleData); // Verifica que los datos sean correctos antes de enviarlos
+    console.log('Enviando datos de venta:', saleData);
 
     return this.http.post<Sale>(`${this.apiUrl}/create`, saleData);
   }
@@ -40,4 +40,14 @@ export class SaleService {
     return this.http.get<any>(`${this.apiUrl}/${saleId}`);
   }
 
+   // Crear una orden de PayPal en el backend
+   createPaypalOrder(totalAmount: number): Observable<any> {
+    const orderData = { totalAmount: totalAmount };
+    return this.http.post<any>(`${environment.urlHost}/api/paypal/create-order`, orderData);
+  }
+
+  // Capturar la orden de PayPal después de la aprobación
+  capturePaypalOrder(orderId: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/paypal/capture-order`, { orderId });
+  }
 }

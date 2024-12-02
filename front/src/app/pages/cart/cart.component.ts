@@ -1,3 +1,4 @@
+import { PaypalService } from './../../services/paypal/paypal.service';
 import { LoginService } from './../../services/auth/login.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -31,7 +32,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private loginService: LoginService,
-    private saleService: SaleService
+    private saleService: SaleService,
+    private paypalService: PaypalService
   ) {}
 
   ngOnInit(): void {
@@ -136,49 +138,61 @@ export class CartComponent implements OnInit {
 
   loadPaypalButton(): void {
     if ((window as any).paypal) {
-      (window as any).paypal.Buttons({
-        createOrder: (data: any, actions: any) => {
-          console.log('Total a pagar:', this.getTotalCost());
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: this.getTotalCost().toString()
-              }
-            }]
-          });
-        },
-        onApprove: (data: any, actions: any) => {
-          return actions.order.capture().then((details: any) => {
-            alert('Pago realizado exitosamente');
-            console.log(details);
-            // Llama a la función de checkout aquí después de un pago exitoso
-            this.checkout(); // Puedes pasar los datos relevantes si es necesario
-          });
-        },
-        onError: (err: any) => {
-          console.error('Error en el pago', err);
-          alert('Hubo un error con el pago');
-        }
-      }).render('#paypal-button-container');
+      (window as any).paypal
+        .Buttons({
+          createOrder: (data: any, actions: any) => {
+            console.log('Total a pagar:', this.getTotalCost());
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: this.getTotalCost().toString(),
+                  },
+                },
+              ],
+            });
+          },
+          onApprove: (data: any, actions: any) => {
+            return actions.order.capture().then((details: any) => {
+              alert('Pago realizado exitosamente');
+              console.log(details);
+  
+              // Guarda los datos de la transacción en el servicio de PayPal
+              this.paypalService.setPaymentData(details);
+  
+              // Extrae el orderId de los detalles de la transacción y lo guarda en PaypalService
+              const orderId = details.id; // ID único de la transacción
+              console.log('ID de la orden de PayPal:', orderId);
+  
+              // No pasa el orderId a createSale; lo maneja de forma independiente en PaypalService
+              this.checkout();
+            });
+          },
+          onError: (err: any) => {
+            console.error('Error en el pago', err);
+            alert('Hubo un error con el pago');
+          },
+        })
+        .render('#paypal-button-container');
     } else {
       console.error('El script de PayPal no se cargó correctamente');
     }
   }
-
-  // Nuevo método para manejar el checkout
+  
+  // Modifica el método checkout para recibir el orderId como argumento opcional
   checkout(): void {
     const totalAmount = this.getTotalCost();
     if (totalAmount <= 0) {
       alert('El total del carrito debe ser mayor a 0 para realizar la compra.');
       return;
     }
+  
     const userId = this.loginService.userId;
     if (userId) {
       // Convierte userId a número
       const parsedUserId = parseInt(userId, 10);
-
+  
       if (!isNaN(parsedUserId)) {
-        const totalAmount = this.getTotalCost();
         this.saleService
           .createSale(parsedUserId, this.cartItems, totalAmount)
           .subscribe({
@@ -199,26 +213,4 @@ export class CartComponent implements OnInit {
       alert('Debes iniciar sesión para realizar una compra.');
     }
   }
-
-  onCreateSale(userId: number, cartItems: any[], totalAmount: number): void {
-    console.log('onCreateSale called with', userId, cartItems, totalAmount); // Verifica que la función se llame correctamente
-  
-    this.saleService.createSale(userId, cartItems, totalAmount).subscribe(
-      (newSale: Sale) => {
-        console.log('Sale successfully created:', newSale);
-        this.sales.push(newSale); // Añade la venta a la lista de ventas
-        this.updateSalesTable(); // Llama a la función para actualizar la tabla si es necesario
-      },
-      error => {
-        console.error('Error al crear la venta:', error);
-      }
-    );
-  }
-
-  updateSalesTable(): void {
-    // Esta función puede usarse para realizar operaciones adicionales al actualizar la lista
-    // Por ejemplo, si necesitas reordenar la lista o hacer cálculos adicionales
-    console.log('Tabla de ventas actualizada');
-  }
-
 }

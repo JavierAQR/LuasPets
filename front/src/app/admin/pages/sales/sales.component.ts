@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { NavComponent } from '../../shared/nav/nav.component';
 import { SaleService } from 'src/app/services/sale/sale.service';
 import { SaleDetail } from 'src/app/models/saleDetail.model';
-
+import { FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-sales',
   standalone: true,
-  imports: [CommonModule, NavComponent],
+  imports: [CommonModule, NavComponent, FormsModule],
   templateUrl: './sales.component.html',
   styleUrls: ['../../admin.component.css'],
 })
 export class SalesComponent implements OnInit {
   sales: any[] = [];
   selectedSaleDetails: SaleDetail[] = [];
+  selectedDetail: any = null;
   showModal = false;
 
   @ViewChild('saleDetailsModal') saleDetailsModal: any; // Referencia al modal
@@ -29,7 +30,13 @@ export class SalesComponent implements OnInit {
         console.error('Error fetching sales data', error);
       }
     );
+
+    if (this.selectedSaleDetails.length > 0) {
+      this.selectedDetail = this.selectedSaleDetails[0];
+    }
+
   }
+
 
   // Método para ver los detalles de una venta
   viewSaleDetails(saleId: number) {

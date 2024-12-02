@@ -19,7 +19,6 @@ export const routes: Routes = [
   {path:'users', loadComponent: ()=> import('./admin/pages/users/users.component').then(c => c.UsersComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'dashboard',loadComponent: ()=> import('./admin/pages/dashboard/dashboard.component').then(c=> c.DashboardComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'appointment',loadComponent: ()=> import('./admin/pages/appointment/appointment.component').then(c=> c.AppointmentComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
-  {path:'record',loadComponent: ()=> import('./admin/pages/record/record.component').then(c=> c.RecordComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'medicine',loadComponent: ()=> import('./admin/pages/medicine/medicine.component').then(c=> c.MedicineComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'food',loadComponent: ()=> import('./admin/pages/food/food.component').then(c=> c.FoodComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'accesories',loadComponent: ()=> import('./admin/pages/accessories/accessories.component').then(c=> c.AccesoriesComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
