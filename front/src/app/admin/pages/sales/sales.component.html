@@ -66,7 +66,7 @@ style="
     <div *ngIf="selectedSaleDetails && selectedSaleDetails.length > 0">
       <!-- Menú desplegable para seleccionar un producto -->
       <div>
-        <label for="productSelector"><strong>Seleccione un producto:</strong></label>
+        <label for="productSelector"><strong>Seleccione un detalle:</strong></label>
         <select
           id="productSelector"
           [(ngModel)]="selectedDetail"
@@ -74,16 +74,16 @@ style="
           style="width: 100%; margin-bottom: 20px;"
         >
           <option *ngFor="let detail of selectedSaleDetails" [ngValue]="detail">
-            {{ detail.productName }}
+            {{ detail.idDetail }}
           </option>
         </select>
       </div>
 
       <!-- Mostrar detalle del producto seleccionado -->
       <div *ngIf="selectedDetail">
-        <p><strong>ID de Detalle:</strong> {{ selectedDetail.idDetail }}</p>
+        <p><strong>ID de Producto:</strong> {{ selectedDetail.productId }}</p>
         <p><strong>Producto:</strong> {{ selectedDetail.productName }}</p>
-        <p><strong>Usuario:</strong> {{ selectedDetail.userFullName }}</p>
+        <p><strong>Nombre Usuario:</strong> {{ selectedDetail.userFullName }}</p>
         <p><strong>Cantidad:</strong> {{ selectedDetail.quantity }}</p>
         <p>
           <strong>Precio Unitario:</strong>

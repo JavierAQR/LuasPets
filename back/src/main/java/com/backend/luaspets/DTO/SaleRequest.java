@@ -5,9 +5,9 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class SaleDTO {
+public class SaleRequest {
     
     private Integer userId;
-    private List<SaleDetailDTO> saleDetails;
+    private List<SaleDetailRequest> saleDetails;
 
 }

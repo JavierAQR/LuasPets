@@ -11,6 +11,7 @@ export const routes: Routes = [
   {path:'blog', loadComponent: ()=> import('./pages/blog/blog.component').then(c => c.BlogComponent)},
   {path:'register', loadComponent: ()=> import('./auth/register/register.component').then(c => c.RegisterComponent)},
   {path:'cart', loadComponent: ()=> import('./pages/cart/cart.component').then(c => c.CartComponent)},
+  {path:'appointment', loadComponent: ()=> import('./pages/appointment/appointment.component').then(c => c.AppointmentComponent)},
 
   /* Botones Blog Para Acceder al Secundario*/
 {path:'secondary', loadComponent: ()=> import('./pages/secondary/secondary.component').then(c => c.SecondaryComponent)},

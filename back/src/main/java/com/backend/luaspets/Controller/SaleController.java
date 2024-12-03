@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.luaspets.DTO.SaleDTO;
-import com.backend.luaspets.DTO.SaleDetailResponseDTO;
-import com.backend.luaspets.DTO.SaleResponseDTO;
+import com.backend.luaspets.DTO.SaleRequest;
+import com.backend.luaspets.DTO.SaleDetailResponse;
+import com.backend.luaspets.DTO.SaleResponse;
 import com.backend.luaspets.Model.Sale;
 import com.backend.luaspets.Services.SaleService;
 import com.backend.luaspets.User.User;
@@ -35,10 +35,10 @@ public class SaleController {
     private UserRepository userRepository;
 
     @GetMapping
-    public ResponseEntity<List<SaleResponseDTO>> getAllSales() {
+    public ResponseEntity<List<SaleResponse>> getAllSales() {
         List<Sale> sales = saleService.getAllSales();
-        List<SaleResponseDTO> responseList = sales.stream().map(sale -> {
-            SaleResponseDTO response = new SaleResponseDTO();
+        List<SaleResponse> responseList = sales.stream().map(sale -> {
+            SaleResponse response = new SaleResponse();
             response.setIdSale(sale.getIdSale());
             response.setUserId(sale.getUser().getId()); // Asumiendo que tienes un método getUser()
             response.setSaleDate(sale.getSaleDate());
@@ -51,20 +51,20 @@ public class SaleController {
     }
 
     @GetMapping("/{saleId}")
-    public ResponseEntity<List<SaleDetailResponseDTO>> getSaleDetails(@PathVariable Integer saleId) {
-        List<SaleDetailResponseDTO> saleDetail = saleService.getSaleDetailsById(saleId);
+    public ResponseEntity<List<SaleDetailResponse>> getSaleDetails(@PathVariable Integer saleId) {
+        List<SaleDetailResponse> saleDetail = saleService.getSaleDetailsById(saleId);
         return ResponseEntity.ok(saleDetail);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<SaleResponseDTO> createSale(@RequestBody SaleDTO saleDTO) {
+    public ResponseEntity<SaleResponse> createSale(@RequestBody SaleRequest saleDTO) {
     User user = userRepository.findById(saleDTO.getUserId())
         .orElseThrow(() -> new IllegalArgumentException("User not found"));
     
     Sale sale = saleService.createSale(user, saleDTO.getSaleDetails());
 
     // Mapear entidad a DTO
-    SaleResponseDTO response = new SaleResponseDTO();
+    SaleResponse response = new SaleResponse();
     response.setIdSale(sale.getIdSale());
     response.setUserId(user.getId()); // Si necesitas devolver este dato
     response.setSaleDate(sale.getSaleDate());

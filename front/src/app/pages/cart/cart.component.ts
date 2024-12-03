@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   constructor( private cartService: CartService, private loginService: LoginService, private saleService: SaleService, private paypalService: PaypalService) {}
 
   ngOnInit(): void {
-    const userId = this.loginService.userId; // Obtén el userId desde LoginService
+     const userId = this.loginService.userId;// Obtén el userId desde LoginService
     if (userId) {
       this.cartId = parseInt(userId, 10);
       this.loadCartItems();

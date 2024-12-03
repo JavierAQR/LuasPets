@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class SaleResponseDTO {
+public class SaleResponse {
     private Integer idSale;
     private Integer userId; // O el dato necesario del usuario
     private LocalDateTime saleDate;

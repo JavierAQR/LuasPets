@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.backend.luaspets.DTO.SaleDetailDTO;
-import com.backend.luaspets.DTO.SaleDetailResponseDTO;
+import com.backend.luaspets.DTO.SaleDetailRequest;
+import com.backend.luaspets.DTO.SaleDetailResponse;
 import com.backend.luaspets.Model.Product;
 import com.backend.luaspets.Model.Sale;
 import com.backend.luaspets.Model.SaleDetail;
@@ -45,16 +45,17 @@ public class SaleService {
         return saleRepository.findAll();
     }
 
-    public List<SaleDetailResponseDTO> getSaleDetailsById(Integer saleId) {
+    public List<SaleDetailResponse> getSaleDetailsById(Integer saleId) {
         Sale sale = saleRepository.findById(saleId)
             .orElseThrow(() -> new RuntimeException("Venta no encontrada: " + saleId));
         
         // Mapear los detalles de la venta a DTOs
         return sale.getSaleDetail().stream().map(detail -> {
-            SaleDetailResponseDTO dto = new SaleDetailResponseDTO();
+            SaleDetailResponse dto = new SaleDetailResponse();
             dto.setIdDetail(detail.getIdDetail());
             dto.setQuantity(detail.getQuantity());
             dto.setUnitPrice(detail.getUnitPrice());
+            dto.setProductId(detail.getProduct().getId());
             dto.setProductName(detail.getProduct().getName()); // Asumiendo que Product tiene un método getName()
             dto.setUserFullName(sale.getUser().getFullName()); // Asumiendo que User tiene un método getFullName()
             return dto;
@@ -62,7 +63,7 @@ public class SaleService {
     }
 
     @Transactional
-    public Sale createSale(User user, List<SaleDetailDTO> saleDetailsDTO) {
+    public Sale createSale(User user, List<SaleDetailRequest> saleDetailsDTO) {
         // Crear la venta
         Sale sale = new Sale();
         sale.setUser(user);
@@ -72,7 +73,7 @@ public class SaleService {
 
         List<SaleDetail> saleDetails = new ArrayList<>();
 
-        for (SaleDetailDTO dto : saleDetailsDTO) {
+        for (SaleDetailRequest dto : saleDetailsDTO) {
             Product product = resolveProduct(dto.getProductId()); // Buscar el producto correcto
             if (product == null) {
                 throw new IllegalArgumentException("Product with ID " + dto.getProductId() + " not found.");
