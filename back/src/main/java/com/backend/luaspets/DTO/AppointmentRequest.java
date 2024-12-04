@@ -11,6 +11,7 @@ public class AppointmentRequest {
     Integer userId;
     Integer petId;
     Integer serviceId;
+    String status;
     LocalDate appointmentDate;
     LocalTime startTime;
     LocalTime endTime;

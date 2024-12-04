@@ -11,6 +11,7 @@ public class AppointmentResponse {
     
     Integer id;
     Integer userId;
+    String status;
     String petName;
     LocalDate appointmentDate;
     LocalTime startTime;

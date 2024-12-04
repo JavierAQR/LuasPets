@@ -71,6 +71,7 @@ public class AppointmentService {
         appointment.setEndTime(request.getEndTime());
         appointment.setService(service);
         appointment.setPet(pet);
+        appointment.setStatus("PENDIENTE");
 
         appointmentRepository.save(appointment);
 
@@ -97,6 +98,10 @@ public class AppointmentService {
         appointment.setStartTime(request.getStartTime());
         appointment.setEndTime(request.getEndTime());
         appointment.setService(service);
+
+        if (request.getStatus() != null) {
+            appointment.setStatus(request.getStatus());
+        }
     
         // Guarda la cita actualizada
         return appointmentRepository.save(appointment);

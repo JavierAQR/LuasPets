@@ -1,48 +1,81 @@
 <app-nav></app-nav>
-<div class="main">
-  <h1>Citas Médicas</h1>
-  <div class="contenedor">
-  <div class="contenido">
-      <div class="campo1">
-          <label for="idDNI">DNI:</label>
-          <input type="text" id="idDNI" placeholder="Ingrese su DNI">
+<main style="margin-left: 320px;">
+  <h1 style="padding-top: 20px;">Gestión de Citas</h1>
+  <button class="btn btn-primary mb-3" (click)="showAddAppointmentForm()">Agregar Cita</button>
+  <div *ngIf="showAddForm" class="mt-4">
+    <h3 *ngIf="selectedAppointment">Editar Cita</h3>
+    <h3 *ngIf="!selectedAppointment">Agregar Cita</h3>
+    <form [formGroup]="appointmentForm" (ngSubmit)="saveAppointment()" class="border p-4 rounded bg-light">
+      <div class="mb-3">
+        <label class="form-label">ID del usuario:</label>
+        <input type="number" formControlName="userId" class="form-control" required />
       </div>
-      <div class="campo2">
-          <label for="Nombre">Nombre:</label>
-          <input type="text" id="Nombre" placeholder="Ingrese su Nombre">
+      <div class="mb-3">
+        <label class="form-label">ID de la mascota:</label>
+        <input type="number" formControlName="petName" class="form-control" required />
       </div>
-      <div class="campo3">
-        <label for="Contacto">Número de Contacto:</label>
-        <input type="text" id="Contacto" placeholder="Ingrese el número de contacto">
+      <div class="mb-3">
+        <label class="form-label">ID del servicio:</label>
+        <input type="number" formControlName="serviceId" class="form-control" required />
       </div>
-      <div class="campo4">
-        <label for="idMascota">ID Mascota:</label>
-        <input type="text" id="idMascota" placeholder="Ingrese el Id de la mascota">
+      <div class="mb-3">
+        <label class="form-label">Fecha de la cita:</label>
+        <input type="date" formControlName="appointmentDate" class="form-control" required />
       </div>
-      <div class="campo5">
-        <label for="Servicio">Servicio:</label>
-        <select id="Servicio">
-            <option value="">Seleccione el servicio</option>
-            <option value="Consulta">Consulta</option>
-            <option value="estetico">Estetico</option>
-            <option value="médico">Medico</option>
-            <option value="alimenticio">Alimento</option>
-          </select>
+      <div class="mb-3">
+        <label class="form-label">Hora de inicio:</label>
+        <input type="time" formControlName="startTime" class="form-control" required />
       </div>
-      <div class="campo6">
-        <label for="Dia">Dia:</label>
-        <input type="text" id="Dia" placeholder="Ingrese el Dia">
+      <div class="mb-3">
+        <label class="form-label">Hora de fin:</label>
+        <input type="time" formControlName="endTime" class="form-control" required />
       </div>
-      <div class="campo7">
-        <label for="Hora">Hora:</label>
-        <input type="text" id="Hora" placeholder="Ingrese la Hora">
+      <div class="mb-3">
+        <label class="form-label">Estado:</label>
+        <select formControlName="status" class="form-control">
+          <option value="PENDING">Pendiente</option>
+          <option value="COMPLETED">Completada</option>
+        </select>
       </div>
-      <div class="botones">
-          <button id="buscar">BUSCAR <span class="icono">🔍</span></button>
-          <button id="ingresar">INGRESAR <span class="icono">✈️</span></button>
-          <button id="modificar">MODIFICAR <span class="icono">✏️</span></button>
-          <button id="eliminar">ELIMINAR <span class="icono">🗑️</span></button>
-      </div>
+      <button type="submit" class="btn btn-success" style="margin-right: 5px;">
+        {{ selectedAppointment ? 'Actualizar' : 'Agregar' }}
+      </button>
+      <button type="button" (click)="cancel()" class="btn btn-secondary">Cancelar</button>
+    </form>
   </div>
-</div>
 
+  <div class="mt-4">
+    <h3>Lista de Citas</h3>
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>ID del usuario</th>
+          <th>ID de la mascota</th>
+          <th>ID del servicio</th>
+          <th>Fecha de la cita</th>
+          <th>Hora de inicio</th>
+          <th>Hora de fin</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments">
+          <td>{{ appointment.id }}</td>
+          <td>{{ appointment.userId }}</td>
+          <td>{{ appointment.petName }}</td>
+          <td>{{ appointment.serviceId }}</td>
+          <td>{{ appointment.appointmentDate }}</td>
+          <td>{{ appointment.startTime }}</td>
+          <td>{{ appointment.endTime }}</td>
+          <td>{{ appointment.status }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editAppointment(appointment)" style="margin-right: 5px;">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteAppointment(appointment.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
