@@ -35,7 +35,6 @@ import com.backend.luaspets.DTO.SaleRequest;
 import com.backend.luaspets.DTO.SaleDetailResponse;
 import com.backend.luaspets.DTO.SaleResponse;
 import com.backend.luaspets.Model.Sale;
-import com.backend.luaspets.Model.Sale;
 import com.backend.luaspets.Services.SaleService;
 import com.backend.luaspets.User.User;
 import com.backend.luaspets.User.UserRepository;
