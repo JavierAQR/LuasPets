@@ -12,6 +12,7 @@ export const routes: Routes = [
   {path:'register', loadComponent: ()=> import('./auth/register/register.component').then(c => c.RegisterComponent)},
   {path:'cart', loadComponent: ()=> import('./pages/cart/cart.component').then(c => c.CartComponent)},
   {path:'appointment', loadComponent: ()=> import('./pages/appointment/appointment.component').then(c => c.AppointmentComponent)},
+  
 
   /* Botones Blog Para Acceder al Secundario*/
 {path:'secondary', loadComponent: ()=> import('./pages/secondary/secondary.component').then(c => c.SecondaryComponent)},
@@ -24,6 +25,7 @@ export const routes: Routes = [
   {path:'food',loadComponent: ()=> import('./admin/pages/food/food.component').then(c=> c.FoodComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'accesories',loadComponent: ()=> import('./admin/pages/accessories/accessories.component').then(c=> c.AccesoriesComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
   {path:'sales',loadComponent: ()=> import('./admin/pages/sales/sales.component').then(c=> c.SalesComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
+  {path:'pets',loadComponent: ()=> import('./admin/pages/pets/pets.component').then(c=> c.PetsComponent), canActivate: [authGuard], data: { role: ['ADMIN'] } },
 ];
 
 

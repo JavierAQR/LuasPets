@@ -29,6 +29,7 @@ public class PetService {
         Pet pet = petRepository.findById(id).orElseThrow(() -> new RuntimeException("Appointment not found"));
         PetResponse dto = new PetResponse();
         dto.setId(pet.getId());
+        dto.setUserId(pet.getOwner().getId());
         dto.setUserName(pet.getOwner().getFullName());
         dto.setName(pet.getName());
         dto.setSpecies(pet.getSpecies());

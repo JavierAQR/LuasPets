@@ -34,6 +34,7 @@ public class PetController {
         List<PetResponse> responses = pets.stream().map(pet -> {
             PetResponse response = new PetResponse();
             response.setId(pet.getId());
+            response.setUserId(pet.getOwner().getId());
             response.setUserName(pet.getOwner().getFullName());
             response.setName(pet.getName());
             response.setSpecies(pet.getSpecies());
@@ -62,6 +63,7 @@ public class PetController {
         Pet pet = petService.createPet(request);
         
         response.setId(pet.getId());
+        response.setUserId(request.getUserId());
         response.setUserName(pet.getOwner().getFullName());
         response.setName(request.getName());
         response.setSpecies(request.getSpecies());
@@ -102,6 +104,7 @@ public class PetController {
 
         PetResponse response = new PetResponse();
         response.setId(updatedPet.getId());
+        response.setUserId(updatedPet.getOwner().getId());
         response.setUserName(updatedPet.getOwner().getFullName());
         response.setName(updatedPet.getName());
         response.setSpecies(updatedPet.getSpecies());

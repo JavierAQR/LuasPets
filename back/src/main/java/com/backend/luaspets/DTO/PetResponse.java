@@ -6,6 +6,7 @@ import lombok.Data;
 public class PetResponse {
     
     Integer id;
+    Integer userId;
     String userName;
     String name;
     String species;
