@@ -41,4 +41,10 @@ export class UserService {
     return this.http.delete<void>(environment.urlApi + "user/" + id)
   }
  
+   // Descargar el archivo Excel
+   downloadExcel(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export.xlsx`, {
+      responseType: 'blob'
+    });
+  }
 }
