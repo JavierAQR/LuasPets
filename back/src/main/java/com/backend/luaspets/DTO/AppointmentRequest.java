@@ -1,5 +1,6 @@
 package com.backend.luaspets.DTO;
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -11,9 +12,8 @@ public class AppointmentRequest {
     Integer userId;
     Integer petId;
     Integer serviceId;
-    String status;
     LocalDate appointmentDate;
     LocalTime startTime;
     LocalTime endTime;
-    
+    String status;
 }

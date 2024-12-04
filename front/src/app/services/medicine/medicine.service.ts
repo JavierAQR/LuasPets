@@ -37,4 +37,11 @@ export class MedicineService {
   deleteMedicine(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  // Descargar el archivo Excel
+  downloadExcel(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export.xlsx`, {
+      responseType: 'blob'
+    });
+  }
 }

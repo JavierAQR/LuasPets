@@ -53,11 +53,11 @@ public class AppointmentController {
 
     response.setId(appointment.getId());
     response.setUserId(request.getUserId());
+    response.setServiceId(request.getServiceId());
+    response.setPetId(request.getPetId());
     response.setAppointmentDate(request.getAppointmentDate());
     response.setStartTime(request.getStartTime());
     response.setEndTime(request.getEndTime());
-    response.setServiceName(appointment.getService().getName());
-    response.setPetName(appointment.getPet().getName());
 
 
     return ResponseEntity.status(HttpStatus.CREATED).body(response);

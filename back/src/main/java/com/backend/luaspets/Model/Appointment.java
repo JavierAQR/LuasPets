@@ -34,6 +34,14 @@ public class Appointment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "service_id", nullable = false)
+    private Services service;
+
+    @ManyToOne
+    @JoinColumn(name = "pet_id", nullable = false)
+    private Pet pet;
+
     @Column(name = "appointment_date", nullable = false)
     private LocalDate appointmentDate;
 
@@ -45,13 +53,5 @@ public class Appointment {
 
     @Column(name = "status", nullable = true)
     private String status;
-
-    @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false)
-    private Services service;
-
-    @ManyToOne
-    @JoinColumn(name = "pet_id", nullable = false)
-    private Pet pet;
 
 }

@@ -33,6 +33,7 @@ public class PetController {
         List<Pet> pets = petService.getAllPets();
         List<PetResponse> responses = pets.stream().map(pet -> {
             PetResponse response = new PetResponse();
+            
             response.setId(pet.getId());
             response.setUserId(pet.getOwner().getId());
             response.setUserName(pet.getOwner().getFullName());

@@ -1,34 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavComponent } from '../../shared/nav/nav.component';
 import { Appointment } from 'src/app/models/appointment.model';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
-
 
 @Component({
   selector: 'app-appointment',
   standalone: true,
-  imports: [NavComponent,CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [NavComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './appointment.component.html',
-  styleUrls: ['../../admin.component.css']
+  styleUrls: ['../../admin.component.css'],
 })
-export class AppointmentComponent {
+export class AppointmentComponent implements OnInit {
   appointments: Appointment[] = [];
+  showAddForm: boolean = false;
   selectedAppointment: Appointment | null = null;
-  showAddForm = false;
   appointmentForm: FormGroup;
 
-  constructor(private appointmentService: AppointmentService, private fb: FormBuilder) {
+  constructor(
+    private appointmentService: AppointmentService,
+    private fb: FormBuilder
+  ) {
     this.appointmentForm = this.fb.group({
-      id: [null, Validators.required], // El ID no es opcional
       userId: ['', Validators.required],
-      petId: ['', Validators.required],
       serviceId: ['', Validators.required],
+      petId: ['', Validators.required],
       appointmentDate: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
-      status: ['PENDIENTE', Validators.required] // Valor por defecto
+      status: ['', Validators.required],
     });
   }
 
@@ -38,53 +44,13 @@ export class AppointmentComponent {
 
   loadAppointments(): void {
     this.appointmentService.getAllAppointments().subscribe(
-      (data: Appointment[]) => {
+      (data) => {
         this.appointments = data;
       },
-      error => {
-        console.error('Error loading appointments', error);
+      (error) => {
+        console.error('Error al cargar las mascotas:', error);
       }
     );
-  }
-
-  showAddAppointmentForm(): void {
-    this.showAddForm = true;
-    this.selectedAppointment = null;
-    this.appointmentForm.reset();
-    this.appointmentForm.get('status')?.setValue('PENDIENTE');
-  }
-
-  saveAppointment(): void {
-    if (this.appointmentForm.invalid) {
-      return;
-    }
-    
-    if (this.selectedAppointment) {
-      // Update existing appointment
-      this.appointmentService.updateAppointment(this.selectedAppointment.id, this.appointmentForm.value).subscribe(
-        updatedAppointment => {
-          const index = this.appointments.findIndex(a => a.id === updatedAppointment.id);
-          if (index > -1) {
-            this.appointments[index] = updatedAppointment;
-          }
-          this.resetForm();
-        },
-        error => {
-          console.error('Error updating appointment', error);
-        }
-      );
-    } else {
-      // Create new appointment
-      this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(
-        newAppointment => {
-          this.appointments.push(newAppointment);
-          this.resetForm();
-        },
-        error => {
-          console.error('Error creating appointment', error);
-        }
-      );
-    }
   }
 
   editAppointment(appointment: Appointment): void {
@@ -94,24 +60,59 @@ export class AppointmentComponent {
   }
 
   deleteAppointment(id: number): void {
-    this.appointmentService.deleteAppointment(id).subscribe(
-      () => {
-        this.appointments = this.appointments.filter(appointment => appointment.id !== id);
-      },
-      error => {
-        console.error('Error deleting appointment', error);
-      }
-    );
+    if (confirm('¿Estás seguro de que quieres eliminar esta cita?')) {
+      this.appointmentService.deleteAppointment(id).subscribe(
+        () => {
+          this.loadAppointments(); // Refresh the list after deletion
+        },
+        (error) => {
+          console.error('Error deleting appointment', error);
+        }
+      );
+    }
   }
 
   cancel(): void {
-    this.resetForm();
+    this.showAddForm = false;
+    this.selectedAppointment = null;
+    this.appointmentForm.reset();
   }
 
-  private resetForm(): void {
+  saveAppointment(): void {
+    if (this.appointmentForm.invalid) return;
+
+    const appointmentData = this.appointmentForm.value;
+
+    if (this.selectedAppointment) {
+      this.appointmentService
+        .updateAppointment(this.selectedAppointment.id, appointmentData)
+        .subscribe(
+          () => {
+            this.loadAppointments();
+            this.cancel();
+          },
+          (error) => {
+            console.error('Error al actualizar la mascota:', error);
+          }
+        );
+    } else {
+      this.appointmentService.createAppointment(appointmentData).subscribe(
+        () => {
+          this.loadAppointments();
+          this.cancel();
+        },
+        (error) => {
+          console.error('Error al agregar la mascota:', error);
+        }
+      );
+    }
+
+    
+  }
+
+  showAddAppointmentForm(): void {
+    this.showAddForm = true;
     this.selectedAppointment = null;
-    this.showAddForm = false;
     this.appointmentForm.reset();
-    this.appointmentForm.get('status')?.setValue('PENDIENTE');
   }
 }

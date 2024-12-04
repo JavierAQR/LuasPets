@@ -8,7 +8,7 @@ import { Pet } from 'src/app/models/pet.model';
 })
 export class PetService {
 
-  private baseUrl = 'http://localhost:8080/pets'; // Cambia el puerto si es necesario
+  private baseUrl = 'http://localhost:8080/pets'; 
 
   constructor(private http: HttpClient) {}
 

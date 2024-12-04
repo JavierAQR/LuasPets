@@ -1,7 +1,8 @@
 <app-nav></app-nav>
 <main>
     <h1>Lista de Accesorios</h1>
-    <button class="btn btn-primary mb-3" (click)="showAddAccessoriesForm()">Agregar Accesorio</button>
+    <button class="btn btn-primary mb-3" (click)="showAddAccessoriesForm()" style="margin-right: 5px;">Agregar Accesorio</button>
+    <button (click)="downloadExcelFile()" class="btn btn-success mb-3"> Descargar Excel</button>
     <div *ngIf="selectedAccessories || showAddForm" class="mt-4">
       <h3 *ngIf="selectedAccessories">Editar Accesorio</h3>
       <h3 *ngIf="showAddForm && !selectedAccessories">Agregar Accesorio</h3>

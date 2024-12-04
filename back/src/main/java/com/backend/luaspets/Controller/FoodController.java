@@ -92,7 +92,7 @@ public class FoodController {
 
     /* excel */
     @GetMapping("/export.xlsx")
-public ResponseEntity<byte[]> exportFoodData() {
+    public ResponseEntity<byte[]> exportFoodData() {
     try (Workbook workbook = new XSSFWorkbook()) {
         Sheet sheet = workbook.createSheet("Comidas");
 

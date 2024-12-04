@@ -116,4 +116,17 @@ cancel(): void {
   this.resetForm();
   this.showAddForm = false;
 }
+
+downloadExcelFile(): void {
+  this.accessoriesService.downloadExcel().subscribe((blob: Blob) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'AlmacenAccesorios.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  });
+}
 }

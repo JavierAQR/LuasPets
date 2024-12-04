@@ -11,11 +11,12 @@ public class AppointmentResponse {
     
     Integer id;
     Integer userId;
-    String status;
-    String petName;
+    Integer serviceId;
+    Integer petId;
     LocalDate appointmentDate;
     LocalTime startTime;
     LocalTime endTime;
-    String serviceName;
+    String status;
+
 
 }

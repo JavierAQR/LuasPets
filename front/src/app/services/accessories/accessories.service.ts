@@ -37,4 +37,10 @@ export class AccessoriesService {
   deleteAccessories(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  downloadExcel(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export.xlsx`, {
+      responseType: 'blob'
+    });
+  }
 }

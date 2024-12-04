@@ -1,7 +1,9 @@
 <app-nav></app-nav>
 <main>
     <h1>Lista de Medicinas</h1>
-    <button class="btn btn-primary mb-3" (click)="showAddMedicineForm()">Agregar Alimento</button>
+    <button class="btn btn-primary mb-3" (click)="showAddMedicineForm()" style="margin-right: 5px;">Agregar Alimento</button>
+    <button (click)="downloadExcelFile()" class="btn btn-success mb-3"> Descargar Excel</button>
+
     <div *ngIf="selectedMedicine || showAddForm" class="mt-4">
       <h3 *ngIf="selectedMedicine">Editar Medicina</h3>
       <h3 *ngIf="showAddForm && !selectedMedicine">Agregar Medicina</h3>

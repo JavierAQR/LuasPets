@@ -43,11 +43,11 @@ public class AppointmentService {
         AppointmentResponse dto = new AppointmentResponse();
         dto.setId(appointment.getId());
         dto.setUserId(appointment.getUser().getId());
-        dto.setPetName(appointment.getPet().getName());
+        dto.setPetId(appointment.getPet().getId());
+        dto.setServiceId(appointment.getService().getId());
         dto.setAppointmentDate(appointment.getAppointmentDate());
         dto.setStartTime(appointment.getStartTime());
         dto.setEndTime(appointment.getEndTime());
-        dto.setServiceName(appointment.getService().getName());
 
         return dto;
     }
@@ -66,11 +66,11 @@ public class AppointmentService {
 
         Appointment appointment = new Appointment();
         appointment.setUser(user);
+        appointment.setPet(pet);
+        appointment.setService(service);
         appointment.setAppointmentDate(request.getAppointmentDate());
         appointment.setStartTime(request.getStartTime());
         appointment.setEndTime(request.getEndTime());
-        appointment.setService(service);
-        appointment.setPet(pet);
         appointment.setStatus("PENDIENTE");
 
         appointmentRepository.save(appointment);
@@ -97,12 +97,9 @@ public class AppointmentService {
         appointment.setAppointmentDate(request.getAppointmentDate());
         appointment.setStartTime(request.getStartTime());
         appointment.setEndTime(request.getEndTime());
+        appointment.setStatus(request.getStatus());
         appointment.setService(service);
 
-        if (request.getStatus() != null) {
-            appointment.setStatus(request.getStatus());
-        }
-    
         // Guarda la cita actualizada
         return appointmentRepository.save(appointment);
     }

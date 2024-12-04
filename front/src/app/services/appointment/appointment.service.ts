@@ -12,23 +12,28 @@ export class AppointmentService {
 
   constructor(private http: HttpClient) {}
 
-  getAllAppointments(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}`);
-  }
+ // Obtener todas las citas
+ getAllAppointments(): Observable<Appointment[]> {
+  return this.http.get<Appointment[]>(this.baseUrl);
+}
 
-  getAppointmentById(id: number): Observable<Appointment> {
-    return this.http.get<Appointment>(`${this.baseUrl}/${id}`);
-  }
+// Obtener una cita por ID
+getAppointmentById(id: number): Observable<Appointment> {
+  return this.http.get<Appointment>(`${this.baseUrl}/${id}`);
+}
 
-  createAppointment(appointment: Appointment): Observable<Appointment> {
-    return this.http.post<Appointment>(`${this.baseUrl}/create`, appointment);
-  }
+// Crear una nueva cita
+createAppointment(appointment: Partial<Appointment>): Observable<Appointment> {
+  return this.http.post<Appointment>(`${this.baseUrl}/create`, appointment);
+}
 
-  updateAppointment(id: number, appointment: Appointment): Observable<Appointment> {
-    return this.http.put<Appointment>(`${this.baseUrl}/${id}`, appointment);
-  }
+// Actualizar una cita existente
+updateAppointment(id: number, appointment: Partial<Appointment>): Observable<Appointment> {
+  return this.http.put<Appointment>(`${this.baseUrl}/${id}`, appointment);
+}
 
-  deleteAppointment(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
+// Eliminar una cita por ID
+deleteAppointment(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.baseUrl}/${id}`);
+}
 }
