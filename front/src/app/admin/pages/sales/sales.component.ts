@@ -50,4 +50,17 @@ export class SalesComponent implements OnInit {
     this.showModal = false; // Oculta el modal
     this.selectedSaleDetails = []; // Limpia los detalles seleccionados
   }
+
+  downloadExcelFile(): void {
+    this.saleService.downloadExcel().subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Ventas.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }

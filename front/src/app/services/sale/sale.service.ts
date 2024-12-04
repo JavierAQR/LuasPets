@@ -48,4 +48,11 @@ export class SaleService {
   capturePaypalOrder(orderId: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/paypal/capture-order`, { orderId });
   }
+
+  // Descargar el archivo Excel
+  downloadExcel(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export.xlsx`, {
+      responseType: 'blob'
+    });
+  }
 }
