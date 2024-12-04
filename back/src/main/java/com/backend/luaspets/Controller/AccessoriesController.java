@@ -1,4 +1,5 @@
 package com.backend.luaspets.Controller;
+
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -59,7 +60,7 @@ public class AccessoriesController {
     public ResponseEntity<Accessories> getAccessoriesById(@PathVariable Integer id) {
         Optional<Accessories> accessories = accessoriesService.getAccessoriesById(id);
         return accessories.map(ResponseEntity::ok)
-                   .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // Endpoint para agregar un nuevo producto
@@ -77,7 +78,8 @@ public class AccessoriesController {
 
     // Endpoint para actualizar un producto existente
     @PutMapping("/{id}")
-    public ResponseEntity<Accessories> updateAccessories(@PathVariable Integer id, @RequestBody Accessories accessoriesDetails) {
+    public ResponseEntity<Accessories> updateAccessories(@PathVariable Integer id,
+            @RequestBody Accessories accessoriesDetails) {
         try {
             Accessories updatedAccessories = accessoriesService.updateAccessories(id, accessoriesDetails);
             return ResponseEntity.ok(updatedAccessories);
@@ -98,16 +100,17 @@ public class AccessoriesController {
     }
 
     @GetMapping("/export.xlsx")
-    public ResponseEntity<byte[]> exportMedicineData() {
+public ResponseEntity<byte[]> exportMedicineData() {
     try (Workbook workbook = new XSSFWorkbook()) {
+        // Crear una hoja de trabajo con nombre
         Sheet sheet = workbook.createSheet("Accesorios");
 
-        // Título
+        // Título del archivo
         Row titleRow = sheet.createRow(0);
         Cell titleCell = titleRow.createCell(0);
         titleCell.setCellValue("Lista del Almacén de Accesorios Para Mascotas");
 
-        // Estilo del título
+        // Estilo para el título
         CellStyle titleStyle = workbook.createCellStyle();
         Font titleFont = workbook.createFont();
         titleFont.setBold(true);
@@ -118,11 +121,11 @@ public class AccessoriesController {
         titleStyle.setFillForegroundColor(IndexedColors.GOLD.getIndex());
         titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
-        // Aplicar el estilo al título y fusionar celdas
+        // Aplicar estilo al título y fusionar celdas para centrarlo
         titleCell.setCellStyle(titleStyle);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9)); // Fusiona desde la columna 0 a la columna 9
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9)); // Fusiona celdas de la columna 0 a la 9
 
-        // Estilo para el encabezado
+        // Estilo para los encabezados de las columnas
         CellStyle headerStyle = workbook.createCellStyle();
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -136,7 +139,7 @@ public class AccessoriesController {
         headerStyle.setBorderRight(BorderStyle.THIN);
         headerStyle.setBorderLeft(BorderStyle.THIN);
 
-        // Estilo para las celdas de datos
+        // Estilo para celdas de datos
         CellStyle dataStyle = workbook.createCellStyle();
         dataStyle.setAlignment(HorizontalAlignment.LEFT);
         dataStyle.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -145,88 +148,105 @@ public class AccessoriesController {
         dataStyle.setBorderRight(BorderStyle.THIN);
         dataStyle.setBorderLeft(BorderStyle.THIN);
 
-        // Estilo para celdas de precio (número con formato de moneda)
+        // Estilo para celdas de tipo moneda (precio)
         CellStyle currencyStyle = workbook.createCellStyle();
         currencyStyle.cloneStyleFrom(dataStyle);
         currencyStyle.setDataFormat(workbook.createDataFormat().getFormat("$#,##0.00"));
 
-        // Encabezados
-        String[] headers = {"ID", "Nombre", "Marca", "Descripción", "Precio", "Stock", "Categoría", "Imagen URL", "Fecha de Registro", "Fecha de Expiración"};
-        Row headerRow = sheet.createRow(1); // Mover el encabezado a la fila 1, debajo del título
+        // Encabezados de las columnas
+        String[] headers = {
+            "ID", "Nombre", "Marca", "Descripción", "Precio", 
+            "Stock", "Categoría", "Imagen URL", "Fecha de Registro", "Fecha de Expiración"
+        };
+        Row headerRow = sheet.createRow(1); // Encabezado en la segunda fila
         for (int i = 0; i < headers.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(headers[i]);
             cell.setCellStyle(headerStyle);
-            sheet.autoSizeColumn(i); // Ajuste automático de ancho de columna para que el contenido se vea completo
+            sheet.autoSizeColumn(i); // Ajusta automáticamente el ancho de la columna
         }
 
-        // Datos
+        // Obtener los datos de la base de datos
         List<Accessories> medicines = accessoriesService.getAllAccessories();
-        int rowIndex = 2; // Comienza en la fila 2, después del título y el encabezado
+        int rowIndex = 2; // Comienza después de la fila del título y el encabezado
+
+        // Llenar la hoja con los datos de los accesorios
         for (Accessories accessories : medicines) {
             Row row = sheet.createRow(rowIndex++);
 
+            // ID
             Cell cellId = row.createCell(0);
             cellId.setCellValue(accessories.getId());
             cellId.setCellStyle(dataStyle);
 
+            // Nombre
             Cell cellName = row.createCell(1);
             cellName.setCellValue(accessories.getName());
             cellName.setCellStyle(dataStyle);
 
+            // Marca
             Cell cellBrand = row.createCell(2);
             cellBrand.setCellValue(accessories.getBrand() != null ? accessories.getBrand() : "");
             cellBrand.setCellStyle(dataStyle);
 
+            // Descripción
             Cell cellDescription = row.createCell(3);
             cellDescription.setCellValue(accessories.getDescription() != null ? accessories.getDescription() : "");
             cellDescription.setCellStyle(dataStyle);
 
+            // Precio
             Cell cellPrice = row.createCell(4);
             cellPrice.setCellValue(accessories.getPrice() != null ? accessories.getPrice().doubleValue() : 0.0);
             cellPrice.setCellStyle(currencyStyle);
 
+            // Stock
             Cell cellStock = row.createCell(5);
             cellStock.setCellValue(accessories.getStock() != null ? accessories.getStock() : 0);
             cellStock.setCellStyle(dataStyle);
 
+            // Categoría
             Cell cellCategory = row.createCell(6);
             cellCategory.setCellValue(accessories.getCategory() != null ? accessories.getCategory() : "");
             cellCategory.setCellStyle(dataStyle);
 
+            // URL de la imagen
             Cell cellImageUrl = row.createCell(7);
             cellImageUrl.setCellValue(accessories.getImage_url() != null ? accessories.getImage_url() : "");
             cellImageUrl.setCellStyle(dataStyle);
 
+            // Fecha de registro
             Cell cellCreatedAt = row.createCell(8);
             cellCreatedAt.setCellValue(accessories.getCreated_at() != null ? accessories.getCreated_at().toString() : "");
             cellCreatedAt.setCellStyle(dataStyle);
 
+            // Fecha de expiración
             Cell cellExpirationDate = row.createCell(9);
             cellExpirationDate.setCellValue(accessories.getExpiration_date() != null ? accessories.getExpiration_date().toString() : "");
             cellExpirationDate.setCellStyle(dataStyle);
         }
 
-        // Ajustar ancho de columnas manualmente en caso de que autoSizeColumn no sea suficiente
+        // Ajustar el ancho de las columnas manualmente para evitar que el contenido quede cortado
         for (int i = 0; i < headers.length; i++) {
-            sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1000); // Añadir espacio adicional para evitar que el contenido quede cortado
+            sheet.setColumnWidth(i, sheet.getColumnWidth(i) + 1000); // Añadir espacio extra para mejor visibilidad
         }
 
-        // Convertir el Workbook en un byte array
+        // Convertir el workbook a un array de bytes para enviarlo como respuesta
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         workbook.write(outputStream);
         byte[] excelData = outputStream.toByteArray();
 
+        // Configurar los encabezados de la respuesta HTTP para descargar el archivo
         HttpHeaders headersResponse = new HttpHeaders();
-        headersResponse.setContentDispositionFormData("attachment", "AlmacenComidas.xlsx");
+        headersResponse.setContentDispositionFormData("attachment", "AlmacenAccesorios.xlsx");
         headersResponse.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
+        // Devolver la respuesta con el archivo en el cuerpo de la respuesta
         return ResponseEntity.ok()
                 .headers(headersResponse)
                 .body(excelData);
     } catch (IOException e) {
-        e.printStackTrace();
-        return ResponseEntity.status(500).build();
+        e.printStackTrace(); // Imprimir la traza de la excepción para facilitar la depuración
+        return ResponseEntity.status(500).build(); // Devolver error 500 si ocurre una excepción
     }
 }
 }
